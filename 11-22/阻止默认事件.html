@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body style="height: 3000px;">
+    <input type="text" name="" id="txt">
+    <img src="timg.jpg" alt="" id="tp">
+    <script>
+        //阻止默认行为：
+        //第一种
+        // document.onkeydown = function (ev) {
+        //     console.log(ev.keyCode);
+        //     if (ev.keyCode === 32) {
+        //         ev.returnValue = false//return false
+        //     }
+        // }
+        //2第二种
+        document.onkeydown = function (ev) {
+        return false
+        }
+        txt.onkeydown = function(ev){
+            ev.cancelBubble =true
+        }
+        //禁止图片的默认行为：
+        tp.onmousedown  =function(ev){
+            ev.returnValue = false
+            // return false
+        }
+        //鼠标右键：oncontextmenu
+        tp.oncontextmenu =function(){
+            return false
+        }
+
+        //a标签超链接是onclick事件不是onkeydown
+
+        //DOM2阻止默认行为
+
+        document.addEventListener('contextmenu',function(ev){
+            // ev.returnValue =false//都兼容
+            ev.preventDefault()//标准
+            //return false //不管用
+        }) 
+
+
+
+    </script>
+</body>
+
+</html>

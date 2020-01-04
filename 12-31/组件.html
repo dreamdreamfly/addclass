@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+      <ul>
+          <li v-for="(val,key) in ary">{{val}}</li>
+          <btn></btn>
+      </ul>
+        
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    /*
+    组件的名字如果是直接引vue.js，那么尽量不要使用驼峰命名，因为命名之后，使用子组件的时候会报错，如果非要使用把子组件改成烤串命名（模版中大写字母变小写前面加一个横岗即可）
+    */
+    const btn = {
+        //末班中最外层只能有一个元素不然会报错
+        template:`
+        <button @click="click">{{num}}</button>
+        `,
+        //子组件的数据是一个函数 ,return后面是一个对象，里面放的是数据，其余的跟都一样的
+        data(){
+        return {
+            num:0
+        }
+        },
+        methods: {
+            click(){
+                ++this.num
+            }
+        },
+    }
+    new Vue({
+        el:"#box",
+        data:{
+            ary:[1,2,3]
+        },
+        //通过components引入子组件
+        components:{
+            btn//btn:btn简写以后的
+        }
+    })
+    </script>
+</body>
+</html>

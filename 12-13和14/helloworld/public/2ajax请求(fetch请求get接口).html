@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    3
+    注册的用户名:
+    <input type="text" id="user"></br>
+    注册的密码：
+    <input type="password" id="pw">
+    <button id="btn">提交</button>
+    <script>
+        /*
+        接口（/到问号之间的）+参数(后台给的)
+        
+        */
+       //fetch请求get接口
+       //get方式有？post方式没有？
+    fetch('/get?user='+user.value+'&pw='+pw.value).then(d=>d.json()).then(d=>{
+        console.log(d);
+        
+    })
+    //当注册用户名失焦触发的事件，问问服务器当前用户名是否已注册，是1就是没有注册可用
+    user.onblur = function(){
+         fetch('/get?user='+user.value).then(d=>d.json()).then(d=>{
+        if(d.code===0){
+            user.style.border = '1px solid red'
+        }else if(d.code===1){
+            user.style.border = '1px solid yellow'
+        }
+    
+    })
+        
+    }
+    
+    </script>
+    
+</body>
+</html>

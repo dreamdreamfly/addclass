@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+
+    用户：<input type="text" id="yhm"></br>
+    密码：<input type="password" id="pw"></br>
+    <button id="btn">注册</button>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" multiple name="filename" id="file">
+      <input type="submit" value="提交" />
+    </form>
+
+  </div>
+
+  <script src="axios.js"></script>
+  <script>
+    yhm.onblur = async function () {
+      let data = await axios.get('/dl?user=' + yhm.value).then(({ data }) => data)
+      if (data.code == 0) {
+        yhm.style.border = '1px solid red'
+      } else if (data.code == 1) {
+        yhm.style.border = '1px solid green'
+      }
+    }
+    btn.onclick = async function () {
+      let v1 = pw.value
+      let v2 = yhm.value
+      //{user:v2,pw:v1}
+      let data = await axios.post('mm', 'user=' + v2 + '&pw=' + v1).then(({ data }) => data)
+      if (data.code == 1) {
+        alert(data.msg)
+        location.href = './bh/index.html'
+        yhm.value = pw.value = ''
+      } else if (data.code == 0) {
+        alert(data.msg)
+      }
+
+    }
+  </script>
+</body>
+
+</html>

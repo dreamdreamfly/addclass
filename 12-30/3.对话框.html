@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="attr" v-on:keyup.13="fn2">
+        <button v-on:click="fn" >发送</button>
+        <button v-on:click="change(5,$event)">发送二</button>
+        <ul>
+            <li v-for="(val,key) in ary ">{{val}}</li>
+        </ul>
+    </div>
+   
+    <script src="vue.js"></script>
+    <script>
+    let v = new Vue({
+        el:"#box",
+        data:{
+            ary:['加油'],
+            attr:'',
+            // num:10
+        },
+        methods: {
+            fn(ev){
+            this.ary.unshift(this.attr)
+             
+             this.attr=''
+            },
+            //如果不传参数，第一个参数就是事件对象。如果传了参数还想拿到事件对象，需要在模版中也就是标签中的事件函数传一个$event  num就是上面传的参数
+            change(num,ev){
+                console.log(num,ev.target);
+                
+            },
+            fn2(ev){
+            this.ary.unshift(this.attr)
+             
+             this.attr=''
+            }
+        },
+
+    })
+    
+    </script>
+</body>
+</html>

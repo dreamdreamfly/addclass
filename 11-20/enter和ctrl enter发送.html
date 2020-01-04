@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="txt">
+    <ul id="ul">
+
+    </ul>
+    <script>
+        
+           txt.onkeyup = function(){
+           if(event.keyCode===13&&event.ctrlKey===true){
+               ul.innerHTML = `<li>${this.value}</li>`+ul.innerHTML
+               this.value =''
+           }
+
+           }
+
+           //自己的
+        // txt.onkeydown = function () {
+        //     console.log(event.keyCode);
+            
+        //     if (event.keyCode === 17) {
+        //         txt.onkeyup = function () {
+        //             if (event.keyCode === 13) {
+        //                 ul.innerHTML = `<li>${this.value}</li>` + ul.innerHTML
+        //                 this.value = ''
+        //             }
+        //         }
+        //     }
+        // }
+
+
+    </script>
+</body>
+
+</html>

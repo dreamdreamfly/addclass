@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model.lazy="ser">
+        <!-- <p>{{val.split('').reverse().join('')}}</p> -->
+        <!-- <p>{{fn()}}</p> -->
+        <!-- <p>{{fn1}}</p> -->
+        <p>{{ser}}</p>
+        <p @click="fn1">{{num}}</p>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+ let v=   new Vue({
+        el:"#box",
+        data:{
+            val:'珠峰培训',
+            num:0
+        },
+        //上来需要先执行一次，也就是调用一下
+        methods: {
+            fn(){
+                return this.val.split('').reverse().join('')
+            }
+        },
+        methods:{
+            fn1(){
+                this.num +=1
+            }
+        },
+        /*
+
+        上来就会执行一次，不需要调用,当数据发生了变化也会继续执行
+        
+        值可以是一个函数，也可以是一个对象，如果是对象里面有get和set方法，但是只能检测第一层的数据深层的检测不到，
+        get读取的时候会触发，必须有return
+        set设置的时候触发，不一定有return
+        get set 检测的是data里面的所有数据
+        */
+        computed: {
+            // fn1(){
+            //     return this.val.split('').reverse().join('')
+            // }
+            ser:{
+                get(){
+                    console.log('触发了get');
+                    console.log(this.val);
+                    
+                    console.log(this.num);
+                    
+                    return this.val.split('').reverse().join('')
+                },
+                set(){
+                //    console.log(key);
+                //    this.val=2
+                console.log('cfl');
+                
+        
+                }
+            }
+        },
+    })
+    // v.num =2
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li v-for="(val,key) in ary">{{val}}</li>
+            <btn v-bind:attr="ary"></btn>
+        </ul>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+
+        /*
+        
+        new vue  不能 挂载在body和html上
+
+        vue是mvvm模式，视图数据双向绑定，数据变视图也变，视图变数据也变
+        父子组件数据流是单向的，子组件是不允许直接改变父级的数据的，需要通知改变父级，再让父级改变子集数据
+        */
+
+        
+        /*
+        父子组件传递：
+        1子组件上写一个v-bind：自定义属性（行间属性）="父级中的数据"（css中操作）
+        2子组件（对象上）上定义一个props的属性，属性的值可以是数组也可以是对象
+          如果是数组["第一步自定义行间属性名字"]
+        3直接用{{props中的名字}}就可以使用了
+        
+        */
+
+        const btn = {
+
+            template: `<div >
+        <button @click="click">{{num}}</button>
+        <div v-for="(val,key) in attr">{{val}}</div>
+        </div>
+        `,
+
+            data() {
+                return {
+                    num: 0
+                }
+            },
+            methods: {
+                click() {
+                    ++this.num
+                }
+            },
+            props: ["attr"]
+        }
+        new Vue({
+            el: "#box",
+            data: {
+                ary: [1, 2, 3]
+            },
+
+            components: {
+                btn
+            }
+        })
+    </script>
+</body>
+
+</html>

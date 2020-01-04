@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        全选的:<input type="radio" value='全选的' v-model='val'>
+        选中的:<input type="radio" value='选中的' v-model='val'>
+        未选的:<input type="radio" value='未选的' v-model='val'>
+        <hr>
+        您选中的是：{{val}}
+        <ul>
+            <li v-for="(val,key) in ser">{{val.title}}:{{val.checked}}</li>
+        </ul>
+    </div>
+    
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:'#box',
+        data:{
+            val:'全选的',
+            ary:[
+                {
+                    id:0,
+                    checked:true,
+                    title:'王东亮'
+                },
+                {
+                    id:1,
+                    checked:false,
+                    title:'李世杰'
+                },
+                {
+                    id:2,
+                    checked:false,
+                    title:'赵忠鹍'
+                }
+
+           ]},
+           computed: {
+              ser:{
+                  get(){
+                      const {ary,val}=this
+                      console.log(val);
+                      return ary.filter(item=>{
+                      if(val=='全选的'){
+                        return item;
+                      }else if(val=='选中的'){
+                          return item.checked;
+                      }else if(val=='未选的'){
+                        return !item.checked;
+                      }})
+              //        return ary.filter(item=>{
+            //             switch(val){
+            //                 case '全选中':
+            //                     return item;
+            //                 case '已选中':
+            //                     return item.checked;
+            //                 case '未选中':
+            //                     return !item.checked;
+            //                 default:
+            //                     return item;
+            //             }
+            //         })
+                  }
+              }
+               
+            
+           },
+           
+        
+    })
+    </script>
+</body>
+</html>

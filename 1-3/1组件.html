@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <button @click="fn">父级按钮{{num}}</button>
+        <hr>
+        <btn :cnum="num">局部组件</btn>
+        <btn2></btn2>
+    </div>
+    <hr>
+    <div id="box3">
+        <btn2></btn2>
+
+    </div>
+    
+   <!-- 注册组件 -->
+    <template id="temp">
+        <div > 
+            <button>{{name}}{{cnum}}</button>
+        </div>
+    </template>
+<template id="temp2">
+    <div>
+        <button>全局组件</button>
+    </div>
+    
+</template>
+    
+    <script src="vue.js"></script>
+    <script>
+
+        // const btn = {
+        //     template: `
+        // <button>{{name}}</button>
+        // `,
+        //     data() {
+        //         return {
+        //             name: 'xxx'
+        //         }
+        //     }
+        // }
+        //也可以和上面一起注册组件 ，最外层只能有一个元素，data是个函数return一个对象
+        //局部组件只能在注册的父级组件下使用,想用的话需要引入子组件，但是注意子组件数据，父级组件中是否都有
+        const btn = {
+           template:"#temp",
+            data() {
+                return {
+                    name: 'xxx'
+                }
+            },
+            props:['cnum']
+        }
+        //全局组件在哪里都可以用
+       const btn2={
+           template:"#temp2"
+       }
+ 
+       Vue.component('btn2',btn2)
+        new Vue({
+            el: "#box",
+            data: {
+                num: 10
+            },
+            methods: {
+                fn(){
+                    this.num++
+                }
+            },
+            components: {
+                btn
+            }
+        })
+        new Vue({
+            el: "#box3",
+           
+        })
+
+    </script>
+</body>
+
+</html>

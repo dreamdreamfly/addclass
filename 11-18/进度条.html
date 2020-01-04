@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+  <style>
+  #box1{
+      height: 10px;
+      width: 100%;
+      border: 1px solid red;
+      border-radius: 6px;
+      padding: 2px;
+      box-sizing: border-box;
+  }
+  #box2{
+      height: 100%;
+      width: 0;
+      background: black;
+      transition: 1s;
+  }
+  
+  </style>
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+    <script>
+    let ary = [
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-159497091.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-152360031.jpg',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153725613.jpgw',
+        'https://goss.veer.com/creative/vcg/veer/800water/veer-153779846.jpg'
+    ];
+    let num = 1 
+    ary.forEach(function(item){
+        let img = document.createElement('img')
+        img.src = item
+        img.onload=function(){
+            box2.style.width = 25*(num++) +'%'
+        }
+        // img.onerror = function(){
+        //     box2.style.width = 25*(num++) +'%'
+        // }
+    })
+    </script>
+</body>
+</html>

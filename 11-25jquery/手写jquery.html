@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //不能在外面new，但是如果在里面new那么就出现了递归
+        /*
+        全局
+        局部：函数
+              块级
+        闭包本身不具备命名空间的，函数本身的局部作用域具有命名空间的
+        命名空间不是闭包，但是闭包具有命名空间的特性
+        解决不被全局污染：
+        1命名空间：
+        2封闭空间（变成局部）
+       
+
+
+        */
+       /*
+       
+       typeof this !=='undefiend'?window:this 找this
+       */
+       (function(global,factory){
+        factory(global)
+       })(this,function(global,NoGlobal){//低版本中undefined会被修改的,此时NoGlobal就是undefined
+        function myjquery (){
+            //return new myjquery 递归
+            return new fn.init//因为不能new自己，所以创建了一个$函数作为替身，这个替身拥有myjquery所有方法和属性
+
+        }
+        
+        let fn =myjquery.prototype={
+            constructor:myjquery,
+            css:function(){
+                console.log(1);
+                
+            }
+        }
+        fn.init = function(){
+
+        }
+        //让$的实例化对象拥有myjquery的方法
+        fn.init.prototype = myjquery.prototype
+        window.myjquery =$= myjquery
+
+       })
+        
+        console.log(myjquery);
+        
+        $().css()
+        //myjquery().css()
+        </script>
+</body>
+</html>

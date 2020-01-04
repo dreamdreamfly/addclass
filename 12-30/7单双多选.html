@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style >
+    .a{
+        background:red;
+    }
+    </style>
+</head>
+<body>
+     <div id="box4">
+      <button @click="click(key)" v-for="(val,key) in ary" v-bind:class="{'a':key===num}">{{val}}</button>
+
+     </div>
+
+    <div id="box1">
+        全选<input type="checkbox" @click="fn" >
+        篮球<input type="checkbox" value="篮球"  ckecked="a" v-model="dx">
+        足球<input type="checkbox" value="足球" v-model="dx">
+        乒乓球<input type="checkbox" value="乒乓球" v-model="dx">
+        选中的是：<span>{{dx}}</span>
+    </div>
+    <div id="box2">
+        男<input type="radio" value="男" v-model="sex">
+        女<input type="radio" value="女" v-model="sex">
+        性别：<span>{{sex}}</span>
+    </div>
+    
+    <script src="vue.js"></script>
+    <script>
+        let v4 =new Vue({
+            el:"#box4",
+            data:{
+                ary:[1,2,3],
+                num:0
+            },
+            methods: {
+                click(key){
+                    this.num=key
+                }
+            },
+        })
+    let v =new Vue({
+        el:"#box1",
+        data:{
+            dx:[],
+            onoff:true,
+            a:''
+        },
+        methods: {
+            fn(){
+                if(this.onoff){
+                    this.dx=['篮球','足球','乒乓球']
+                }else{
+                    this.dx=[]
+                }
+                console.log(this.a);
+                
+                 this.onoff=!this.onoff
+                
+                
+            }
+        },
+    })
+    let v1 =new Vue({
+        el:"#box2",
+        data:{
+            sex:''
+        }
+    })
+    </script>
+</body>
+</html>

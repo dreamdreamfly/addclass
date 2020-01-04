@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    li{
+        height: 100px;
+        width: 100px;
+        ba
+    }
+    
+    </style>
+</head>
+<body>
+    <div id="box" >
+
+        <app :cnum="num">
+            <p>已被替换</p>
+        </app>
+    </div>
+    <template id="app" >
+        <div>
+             <ul>
+                 <li v-for="(val,key) in ary">
+                     <slot>
+                     {{val}}{{cnum}} 
+                    </slot>
+
+                 </li>
+             </ul>
+            
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    
+    <script>
+        /*
+        插槽：
+            在开发中写什么结构就是什么结构，优点就是固定统一，缺点就是不够灵活
+            插槽就是为了解决不灵活的问题，能够自定义一些组件，能够替换之前默认的配置
+
+            匿名插槽：
+               子组件中定义slot
+               父组件中给调用的子组件双标签内填入结构
+               这个时候slot就被填入结构覆盖
+        */
+        const app ={
+            template:"#app",
+            data(){
+                return {
+                    ary:[1,2,3],
+                    // cc:''
+                }
+            },
+            // inject:['ary2'],
+            props:['cnum'],
+            // created() {
+            //    this.cc=this.$parent.num
+                
+            // },
+        }
+    new Vue({
+        el:"#box",
+        data:{
+            num:0,
+           
+        },
+        // provide:{
+        //     ary2:[11,22,33]
+        // },
+        components:{
+            app
+        }
+    })
+    </script>
+</body>
+</html>

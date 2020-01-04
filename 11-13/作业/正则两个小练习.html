@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+       把下面str的name，age，say换成obj中的value值
+    */  
+    let obj = {
+        name:'小明',
+        age:18,
+        say:'好好学习，天天向上'
+    }  
+    let str = '我的名字叫{name},年龄是{age}岁,我想说:{say}';
+    console.log(str.replace(/{([a-z]+)}/g,function($0,$1){return obj[$1]}));      
+    /*
+        计算下面字符串中哪个字符出现的次数最多,它是谁，出现了多少次
+    */
+    
+    // let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+    //常规方法：
+    // let obj1 ={}
+    // for (let i = 0 ;i<str2.length;i++){
+        
+    //     if(obj1[str2[i]]){
+    //         obj1[str2[i]] +=1
+    //     }
+    //     else{
+    //         obj1[str2[i]] =1
+    //     }
+    // }
+    // console.log(obj1);
+    
+    // let num = 0
+    // let key = ''
+    // for(let arr in obj1){
+    //     if(obj1[arr]>num){
+    //         num = obj1[arr]
+    //         key =arr
+    //     }
+
+    // }
+    // console.log(num,key);
+    //正则
+    let str2 = 'hd82nxa89a3axdma2naejaaxaa8n2xdanja2cah2hnadhioamwajexnad8mdahiodn';
+    let str3 = str2.split('').sort().join('')
+    let obj2 ={}
+   str3.replace(/(\w)\1+/g,function($0,$1){
+        obj2[$1] = $0.length
+   })
+   let num = 0
+   let key =''
+   for (let arr in obj2 ){
+       if(obj2[arr]>num){
+           num=obj2[arr]
+           key = arr
+       }
+   }
+   console.log(num,key);   
+    </script>
+   
+</body>
+</html>

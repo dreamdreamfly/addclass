@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #div{
+        height: 500px;
+        width:500px;
+        border: 5px solid black;
+        padding: 20px;
+        position: relative;
+        position: absolute;
+    }
+    #div2{
+        height: 200px;
+        width:200px;
+        border: 5px solid red;
+        position: absolute;
+    }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <div id="div2"></div>
+    </div>
+
+    
+    <script> 
+    /*
+    offsetLeft/offsetTop在实际中，页面复杂的情况下，要慎用，获取的距离是根据定位父级来的
+    绝对位置才是最稳的一个距离（当前元素到页面（body）顶部的距离）
+    思路：求得绝对位置，就是把当前元素的所有祖先节点的距离计算一遍，求和即可。
+    具体实施：1先定义一个元素（作为当前元素）
+    2先求当前元素的距离（包含定位距离和边框距离）
+    3把这次的定位父级变成当前元素，最后求和减去要求元素的边框宽度
+    */       
+    
+      class Tools {
+         position(nowele){
+        let h = 0
+         let l = 0 
+         let nl =nowele.clientLeft
+         let h1 = nowele.clientTop
+         while(nowele){
+            l +=(nowele.clientLeft+nowele.offsetLeft)       
+            h +=(nowele.clientTop+nowele.offsetTop)
+            nowele = nowele.offsetParent   
+         }         
+         l = l-nl    
+         h = h-h1     
+         return{l,h}
+           }
+      }
+        
+    let f = new Tools
+    let {l,h} = f.position(div2)
+    console.log(l,h);
+    
+    
+    
+   
+    
+           
+    
+    
+
+    </script>
+</body>
+</html>

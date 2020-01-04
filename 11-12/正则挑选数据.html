@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    请你把下列字符串中数字包括连续的数字挑出来，分别存到一个数组中
+    */
+    //正则
+    let str = 'xh271y5rc74 326rgb087yr23n6x832321';
+    console.log(str.match(/\d+/g));
+    console.log(/\d+/.exec(str));//exec正则的内置类，只能找到第一个，用g也不起作用，length是1
+    // 传统方法
+    console.log(typeof str[1]);
+    let temp = ''
+    let ary =[]
+    for(let i =0;i<str.length;i++){
+        if(parseInt(str[i])){
+           temp +=str[i]
+        }
+        else{
+            if(temp!==''){
+                ary.push(temp)
+                temp = ''
+           }
+        }       
+    }
+    if(temp){
+        ary.push(temp)
+    }
+    console.log(ary);
+    
+    
+    
+    
+    
+    
+
+    </script>
+    
+</body>
+</html>

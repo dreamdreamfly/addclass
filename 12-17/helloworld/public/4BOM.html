@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="height: 3000px;">
+    <button id="hash">hash</button>
+    <button id="search">search</button>
+    <script>
+        /*
+        浏览器对象模型（基本不兼容）：
+            window.innerHeight:浏览器的高度
+            window.pageYOffset:滚动条的距离 只可读不可写
+            document.documentElement.scrollTop=0 可写
+            window.scrollTo(x,y)  设置滚动条的距离（不带单位）
+
+            window.location:
+                host:host值
+                hostname：当前host的名字
+                href：url链接
+                origin：源
+                pathname：路径的名字（接口）
+                port:端口
+                protocol：协议（http）
+
+
+                reload（方法）：刷新页面
+
+
+                ***ajax最大的缺陷丧失浏览器历史记录，所谓的不安全
+                
+                
+                hash：锚信息（哈希值） #之后的， 包含# 修改他不会刷新页面
+                
+                
+                search 查询信息 ?12432#   ？到#之间的信息 修改它会刷新页面的 包括?
+                当hash值变化的时候，会触发一个onhashchange的事件
+
+
+                不管是改变了hash还是改变了search都会使浏览器记录用户操作（使用前进后退可以回滚）
+
+                当切换路由的时候会从后端的静态资源中查找需要的资源传送到前台，后端跳转路由会刷新页面，这样会影响用户体验，所以使用hash来充当跳路由的动作来请求资源，这样一来，第一能成功请求资源，而来不刷新页面
+
+        window.navigator.userAgent 用户内核信息（字符串类型的），可以根据里面的包含的内容不同判断出是什么类型的内核（独有的字符），从而可以做不同的事情，注意的是容易被模拟  用这个事件可以把PC端不同的浏览器，移动端安卓和和ios都可以区别出来的
+        
+        */
+    //    document.onclick=function(){
+    //     //    console.log(window.pageYOffset);
+    //     //    window.pageYOffset=0
+    //     // document.documentElement.scrollTop=0
+    //     // window.scrollTo(0,2000)
+    //    }
+    //    console.dir( window.location);
+    let i=0
+    hash.onclick =function(){
+        window.location.hash ='a=b'+ i++//写操作
+        console.log(window.location.hash);//读操作
+        
+    }
+    search.onclick =function(){
+        window.location.search='b=1'+i++
+        console.log(window.location.search);
+        
+    }
+    window.onhashchange =function(){
+        console.log(1)
+    }
+        
+    </script>
+</body>
+</html>

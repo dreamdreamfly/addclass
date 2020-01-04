@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <button @click="fn">父级按钮{{num}}</button>
+        <hr>
+        <btn 
+        :cnum="num"
+        :yourname="cname"
+        ></btn>     
+    </div>
+ 
+    
+    
+   <!-- 注册组件 -->
+    <template id="temp">
+        <div > 
+            <button>局部组件{{name}}{{cnum}}</button>
+            <p>{{yourname}}</p>
+        </div>
+    </template>  
+    <script src="vue.js"></script>
+    <script>
+        const btn = {
+           template:"#temp",
+            data() {
+                return {
+                    name: 'xxx'
+                }
+            },
+            props:{
+                cnum:{
+                    //父级传递的数据必须是指定数据类型，不然会报错
+                    type:Number,
+                    //设置默认值，不传的话走这个
+                    default:25,
+                    
+
+                },
+                yourname:{
+                    //是否是必传项
+                    required:true,
+                    //检测数据是否符合这个规则，不符合会报错
+                    validator: function(val){
+                   console.log(val);
+                   return /[\u4e00-\u9fa5]+/.test(val)
+                    }
+                }
+                // yourname:{
+                //     
+                //    
+                //     validator: function(val){
+                // //   console.log(val);
+                  
+                //     }
+                // }
+            }
+        }
+        
+        new Vue({
+            el: "#box",
+            data: {
+                num: 10,
+                cname:'asd'
+            },
+            methods: {
+                fn(){
+                    this.num++
+                }
+            },
+            components: {
+                btn
+            }
+        })
+       
+
+    </script>
+</body>
+
+</html>

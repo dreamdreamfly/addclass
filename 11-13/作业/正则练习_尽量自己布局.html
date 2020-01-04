@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #contain {
+            width: 400px;
+            height: 400px;
+            border: 1px solid yellowgreen;
+            border-radius: 20px;
+            margin: 20px auto;
+            padding: 60px 30px 30px 30px;
+            box-sizing: border-box;
+        }
+
+        #contain div {
+            margin-bottom: 30px;
+        }
+
+        #contain div span {
+            font-size: 20px;
+            color: #555;
+            width: 80px;
+            display: inline-block;
+        }
+
+        #contain div input {
+            width: 200px;
+            height: 30px;
+            outline: none;
+            padding-left: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid yellowgreen;
+        }
+
+        #btn {
+            display: block;
+            outline: none;
+            width: 100px;
+            height: 40px;
+            border: 1px solid yellowgreen;
+            background-color: #fff;
+            border-radius: 10px;
+            font-size: 20px;
+            margin: 20px auto;
+            cursor: no-drop;
+            color: #555;
+
+        }
+
+        #contain .ok {
+            border-color: yellowgreen;
+        }
+
+        #contain .error {
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contain">
+        <div id="qq">
+            <span>QQ：</span>
+            <input type="text" data-name="qq" placeholder="请输入QQ">
+        </div>
+        <div id="email">
+            <span>Email：</span>
+            <input type="text" data-name="email" placeholder="请输入邮箱">
+        </div>
+        <div id="mobile">
+            <span>Mobile：</span>
+            <input type="text" data-name="phone" placeholder="请输入手机号码">
+        </div>
+        <div id="date">
+            <span>Date：</span>
+            <input type="text" data-name="birth" placeholder="请输入生日">
+        </div>
+
+        <p><input type="submit" value="注册" id="btn"></p>
+
+    </div>
+    <script>
+        let lis = document.querySelectorAll('#contain input[type="text"]')
+        //获取具有特有属性的input元素
+        let obj = {
+            qq: /^\d{5,11}$/,
+            email: /^[1-9]\d{4,10}@qq(\.c(om|n)){1,2}$|^[a-zA-Z][\d\D]{4,9}@[a-zA-Z\d]{2,8}(\.c(om|n)){1,2}$/,
+            phone: /^1[3-9]\d{9}$/,
+            birth: /^(\d{4})\D(\d{1,2})\D(\d{1,2})\D?$/
+        }
+        console.log(lis);
+        let ary = []
+        lis.forEach(function (item, i) {
+            ary[i] = false
+            item.oninput = function () {
+                let re = obj[this.dataset.name]
+                if (re.test(this.value)) {
+                    if (this.dataset.name === 'birth') {
+                        let a = (this.value).match(obj.birth)
+                        let b = a[1] + ' ' + a[2] + ' ' + a[3]
+                        let dd = new Date(b)
+                        let nd = new Date - dd
+                        console.log(dd == 'Invalid Date')//dd是个对象，'Invalid Date'是个字符串，不能绝对相等，只能两个相等;
+                        this.className = nd > 0 ? (dd != 'Invalid Date' ? 'ok' : 'error') : 'error';//出生时间比现在早，并且是合法的（2月份没30号）
+                        ary[i] = nd > 0 ? (dd != 'Invalid Date' ? true : false) : false;
+                    }else{
+                        this.className = 'ok'
+                        ary[i] = true
+                    }
+
+                }
+                else {
+                    this.className = 'error'
+                    ary[i] = false
+                }
+                btn.style.cursor = ary.every(a => a) ? 'pointer' : 'no-drop'
+            }
+        })
+
+
+
+    </script>
+</body>
+
+</html>

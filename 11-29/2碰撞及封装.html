@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #box{
+        width:100px;
+        height: 100px;
+        background: red;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+    #box2{
+        width:100px;
+        height: 100px;
+        background: skyblue;
+        position: absolute;
+        top:300px;
+        left:300px;
+    }
+    </style>
+    
+</head>
+<body>
+        <div id="box"></div>
+        <div id="box2"></div>
+    <script>   
+    /*
+    九宫格碰撞法
+    DOM0 绑定：on
+         解绑：null
+    DOM2 绑定：addEventListener
+         解绑：removeEventListener（'事件名'，有名函数，布尔值（捕获或者冒泡））
+         注意：解除绑定必须是一个有名函数（要和绑定的函数对应）
+
+
+    */
+    
+   
+    // box.addEventListener('mousedown',function(ev){
+    //     let{top,left}= this.getBoundingClientRect()
+    //     let disx = ev.pageX-left
+    //     let disy = ev.pageY-top
+      
+        
+    //     document.addEventListener('mousemove',m)
+    //     function m (ev){
+    //         box.style.cssText=`left:${ev.pageX-disx}px;top:${ev.pageY-disy}px` 
+    //         let {top:t1,left:l1,bottom:b1,right:r1} =  box.getBoundingClientRect()
+    //         let {top:t2,left:l2,bottom:b2,right:r2} =  box2.getBoundingClientRect() 
+    //         if(r1<l2||l1>r2||b1<t2||t1>b2){
+    //             console.log('没碰到');
+    //             box2.style.background = 'skyblue'
+    //         }else{
+    //             box2.style.background = 'red'
+    //         }      
+    //     }
+    //     console.log( bong(box,box2));
+        
+       
+    //     document.addEventListener('mouseup',up)
+    //     function up(ev){
+    //         document.removeEventListener('mousemove',m)
+    //         document.removeEventListener('mouseup',up)
+
+    //     }
+    //     ev.preventDefault();
+    // })
+    function bong(obj2,obj){
+    let {left:l,top:t,bottom:b,right:r} = obj.getBoundingClientRect();
+    let {left:l2,top:t2,bottom:b2,right:r2} = obj2.getBoundingClientRect();
+    if(r < l2 || b < t2 || l > r2 || t > b2){
+        // console.log('没碰到');
+        return false;
+    }else{
+        // console.log('碰到');
+        return true;
+    }
+}
+    box.addEventListener('mousedown',function(ev){
+        let{top,left}= this.getBoundingClientRect()
+        let disx = ev.pageX-left
+        let disy = ev.pageY-top
+      
+        
+        document.addEventListener('mousemove',m)
+        function m (ev){
+            box.style.cssText=`left:${ev.pageX-disx}px;top:${ev.pageY-disy}px` 
+           if(bong(box,box2)){
+            box2.style.background = 'red'
+           }else{
+            box2.style.background = 'skyblue'
+           }
+            
+             
+        }
+       
+        
+       
+        document.addEventListener('mouseup',up)
+        function up(ev){
+            document.removeEventListener('mousemove',m)
+            document.removeEventListener('mouseup',up)
+
+        }
+        ev.preventDefault();
+    })
+    
+    </script>
+    
+</body>
+</html>

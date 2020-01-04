@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/1.css">
+<style>
+
+</style>
+</head>
+<body>
+    <section>
+       <nav>
+           <span>排序</span>
+           <a href="javascript:0;" id="shangjian">上架时间</a>
+           <a href="javascript:0;" id="redu">热度</a>
+           <a href="javascript:0;" id="jiaqian">价钱</a>
+           <select name="" id="">
+               <option value="">按照文字搜索</option>
+               <option value="">按照价格搜索</option>
+               <option value="">按照热度搜索</option>
+           </select>
+           <input type="text" name="" id="">
+           <button>查询</button>
+           <button>还原</button>
+       </nav>
+       <ul id="ul">
+           <!-- <li>
+               <img data-src="img/10.jpg" alt="">
+               <p>商品名称：<span>HUAWEI</span></p>
+               <p>上架时间：<span>2014-01-01</span></p>
+               <p>商品热度：<span>12334</span></p>
+               <p>商品价格：<span>123</span></p>
+           </li> -->
+       </ul>
+    </section>
+    <script src="json/tools.js">
+    </script>
+    <script>
+    fetch('json/product.json').then(a=>a.json()).then(data=>{
+        console.log(data);
+        let newdata = data.concat()
+        function der (newdata){
+            
+       let lis =  newdata.map((item,i)=>{
+          let   {price,hot,title,time,img} = item
+            return `<li title=${title}>
+               <img data-src="${img}" alt="">
+               <p>商品名称：<span>${title.substr(0,6)}</span></p>
+               <p>上架时间：<span>${time}</span></p>
+               <p>商品热度：<span>${hot}</span></p>
+               <p>商品价格：<span>${price}</span></p>
+           </li>`          
+        }).join('')
+        ul.innerHTML=lis
+
+        } 
+        der(newdata)
+        redu.onoff = true
+        redu.onclick = function(){
+           
+            if(this.onoff)
+            {
+                
+                newdata.sort((a,b)=>{
+                 return a.hot-b.hot})
+                
+            }
+            else{
+                
+                newdata.sort((a,b)=>{
+                 return b.hot-a.hot})
+            }
+            this.onoff = !this.onoff
+            der(newdata)
+            fn()
+        }  
+        shangjian.onoff = true
+        shangjian.onclick = function(){
+           
+            if(this.onoff)
+            {
+                newdata.sort((a,b)=>{
+                 return new Date(a.time)-new Date(b.time)})
+            }
+            else{
+                newdata.sort((a,b)=>{
+                return new Date(b.time)-new Date(a.time)})
+            }
+            this.onoff = !this.onoff
+            der(newdata)
+            fn()
+        }  
+
+        const f = new Tools
+        const ih = window.innerHeight//可视区的高度
+        
+
+        window.onscroll =fn
+        let num =50
+        fn()
+        function fn (){
+            
+            let li = document.querySelectorAll('#ul li')
+            // console.log(window.pageYOffset);//滚动条的距离
+            li.forEach((ele,i)=>{
+                let{h}= f.position(ele)//绝对位置
+                if(ih+window.pageYOffset>=h&&!ele.children[0].src){
+                    console.log(111);
+                    
+                    ele.children[0].src=ele.children[0].dataset.src
+                    setTimeout(() => {
+                        ele.children[0].style.opacity=1
+                    }, num*i);
+                }
+                
+                
+                
+            })
+            
+    
+           
+            
+            
+        }
+        })
+
+    </script>
+</body>
+</html>

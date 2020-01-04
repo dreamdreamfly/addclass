@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="axios.js"></script>
+    <script>
+        /*
+        全局拦截
+        axios.interrequest.use请求拦截
+         开loading
+         登录验证
+         权限验证
+        axios.interceptor.response.use响应拦截
+         关loading
+         二次操作数据
+         如果接口自带登录验证或者权限验证，也可以做路由跳转
+        自定义拦截
+         const instance =axios.create();=>instance=axios
+         instanceaxios.interceptors.request.use(config => {
+         // Do something before request is sent
+         return config;
+         });
+
+        */
+        
+        // //请求拦截
+        // axios.interceptors.request.use(async function (config) {
+        //     let u = localStorage.getItem('session_id');
+        //     //先看看用户是否登录过，如果没有登录过直接跳到登录页
+        //     if (u) {//如果用户登录过，但是有效期有可能已过，那么要请求是否登录的接口去验证
+        //         let data =await fetch('/islogin').then(d => d.json())//不能跟之前的请求方法一样不然会死循环
+        //         if (data.code == 0) {
+        //             return config
+        //         }else{
+        //             location.href='/'
+        //         }
+
+        //     }else {
+        //         location.href='/'
+        //     }});
+        const intance = axios.create();
+
+let mm = intance.interceptors.request.use((config)=>{
+    console.log(config);
+    return config;
+})
+
+document.onclick = function(){
+    axios.get('/a').then((user)=>{
+        console.log(user);
+    });
+    intance.get('/b').then((d)=>{
+        console.log(d);
+        //当b数据回来的时候，取消局部拦截
+        intance.interceptors.request.eject(mm);
+    });
+}    
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //从后往前找，把3个数字前面的数字后加上一个，号
+    //前瞻
+    let str = '91234567'
+     console.log(str.replace(/(\d)(?=(\d{3})+$)/g,'$1,'));               
+    //后顾
+     let s = '中国人美国人韩国人中国人';           
+            s.replace(/(?<=中国)人/g,function(a,b,c,d){
+                console.log(a,b,c,d);               
+            })
+    </script>
+    
+</body>
+</html>

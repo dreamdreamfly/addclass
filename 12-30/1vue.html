@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box2{
+        height: 100px;
+        width: 100px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+      <button v-on:click="fn">{{title}}</button>
+      <div id="box2" v-show="b"></div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    let v =new Vue({
+        el:'#box',
+        data:{
+            b:true,
+            title:'消失'
+
+
+        },
+        methods: {
+            fn(){
+                this.b=!this.b
+                this.title =`${this.b?'消失':"显示"}`
+            }
+        },
+
+    })
+    
+    </script>
+</body>
+</html>

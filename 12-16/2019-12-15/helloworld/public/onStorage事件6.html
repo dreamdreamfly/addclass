@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        window.onStorage事件  
+           会触发兄弟页面的事件,例如购物车等事件
+        
+        */
+        //localStorage.setItem('name','hyw')
+        document.onclick = function () {
+
+            localStorage.setItem('name', 'sfl')
+
+        }
+        window.onstorage = function () {
+            console.log('cf1');
+
+        }
+
+
+    </script>
+</body>
+
+</html>

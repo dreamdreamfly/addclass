@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    3
+    注册的用户名:
+    <input type="text" id="user"></br>
+    注册的密码：
+    <input type="password" id="pw">
+    <button id="btn">提交</button>
+    <script>
+
+       
+        //fetch请求post接口
+        user.onblur = function () {
+            //第一个参数就是url因为此时是同域下所以才省略写
+            fetch('/post', {
+                method: 'post',
+                headers: {
+                    'content-type': 'application/x-www-form-urlencoded'
+                },
+                body: 'user=' + this.value
+            }).then(a => a.json()).then(d => {
+                // if (d.code === 0) {
+                //     user.style.border = '1px solid red'
+                // } else if (d.code === 1) {
+                //     user.style.border = '1px solid yellow'
+                // }
+                console.log(d);
+                
+
+            })
+        }
+    </script>
+
+</body>
+
+</html>

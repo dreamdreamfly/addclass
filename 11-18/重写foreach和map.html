@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+    ary.forEach(function(item,i,all),that)
+    
+    */
+    // let ary =[1,2,3,4]
+    // ary.forEach(function(itam,i,all){
+    //     console.log(this,itam,i,all);
+        
+    // },document)
+   
+    
+    // Array.prototype.myforEach=function(cb,that){
+    //     for(let i =0;i<this.length;i++){
+    //         cb.call(that,this[i],i,this)
+    //     }
+       
+    // }
+    // ary.myforEach(function(itam,i,all){
+    //     console.log(itam,i,all,this);
+        
+    // },document)
+    /*
+    map
+    */
+    let ary2 =[1,2,3,4,5,6] 
+    // let a =ary2.map(function(item,i,all){
+    //     console.log(item,i,all,this);
+        
+    // return 2
+    // },document)
+    // console.log(a);
+     Array.prototype.myMap=function(cb,that){
+         let ary =[]
+        for(let i =0;i<this.length;i++){
+            ary.push(cb.call(that,this[i],i,this)) 
+        }
+        return ary
+    }
+    let b =ary2.myMap(function(item,i,all){
+        console.log(item,i,all,this);
+        
+    return i
+    },document)
+    console.log(b);
+    </script>
+</body>
+</html>

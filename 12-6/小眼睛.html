@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    div{
+        width: 126px;
+        height: 19px;
+        
+    }
+    #txt{
+        float: left;
+    }
+    img{
+        float: right;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <div>
+            <input id="txt" type="password" style="width:100px;">
+            <img  id="img" src="眼睛_闭.png" alt="" style="width:20px;height:17px">
+    </div>
+<script>
+
+    let onoff=true
+img.onclick = function(){
+    
+    if(onoff){
+    this.src = "眼睛_开.png"
+    txt.type = 'text'
+    }else{
+        this.src = "眼睛_闭.png"
+    txt.type = 'password'
+    }
+    onoff=!onoff
+    
+}
+
+</script>
+
+</body>
+</html>

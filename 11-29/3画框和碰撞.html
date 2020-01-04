@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        height: 100px;
+        width: 100px;
+        border: 1px dashed black;
+        background:rgba(200,210,.1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        display:none;
+    }
+    #box1{
+        height: 100px;
+        width: 100px;
+        background: red;
+    }
+    #box2{
+        height: 100px;
+        width: 100px;
+        background:yellow;
+        position: absolute;
+        left: 300px;
+        top: 300px;
+    }
+
+    
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+  <script>
+      function bong(obj2,obj){
+    let {left:l,top:t,bottom:b,right:r} = obj.getBoundingClientRect();
+    let {left:l2,top:t2,bottom:b2,right:r2} = obj2.getBoundingClientRect();
+    if(r < l2 || b < t2 || l > r2 || t > b2){
+        // console.log('没碰到');
+        return false;
+    }else{
+        // console.log('碰到');
+        return true;
+    }
+}
+  document.onmousedown = function(ev){
+      let a = ev.pageX
+      let b =ev.pageY
+      document.onmousemove = function(ev){
+        let w = Math.abs(ev.pageX-a)
+        let h = Math.abs(ev.pageY-b)
+        box.style.display='block'
+        box.style.width=w+'px'
+        box.style.height=h+'px'
+        box.style.left = ev.pageX-a>0?a+'px':ev.pageX+'px'
+        box.style.top = ev.pageY-b>0?b+'px':ev.pageY+'px'
+        if(bong(box1,box)){
+            box1.style.background ='black'
+        }else{
+            box1.style.background ='red'
+        }
+        if(bong(box2,box)){
+            box2.style.background ='black'
+        }else{
+            box2.style.background ='yellow'
+        }
+    }
+        document.onmouseup=function(){
+            document.onmousemove = null
+            document.onmouseup =null
+            box.style.display='none'
+        }
+        ev.returnValue =false
+        
+  }
+  
+  </script>
+</html>

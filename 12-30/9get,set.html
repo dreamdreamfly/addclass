@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script >
+       let  obj={
+            age:10
+        }
+        Object.defineProperty(obj,'age',{
+            //那个对象，什么属性名
+            // writable:true,//是否可以被修改
+            // enumerable:true,//是否可以被枚举
+            // configurable:true,//是否可以被删除
+            get(){//当读这个属性的时候触发
+        //   console.log('触发了');
+          //return后的内容就是读操作后的结果（必须写return）
+          return 13
+            },
+            set(val){//当写这个属性的时候触发的,可以没有return的
+
+                console.log('触发了2');
+                console.log(val);
+                
+              
+            }
+
+        })     
+        //obj.name=12
+    //    delete obj.name//删除对象某个属性
+    // for(let attr in obj ){
+    //     console.log(attr);
+        
+    // }
+    //   delete obj.name
+    //   console.log(obj);
+    //   console.log(obj.age);
+    obj.age=20
+    console.log(obj.age);
+    // computed: {
+    //     //可以是一个函数，里面默认的是set方法，也可以是一个对象，里面有get，set方法
+    // },
+    
+      
+
+        
+        </script>
+</body>
+</html>

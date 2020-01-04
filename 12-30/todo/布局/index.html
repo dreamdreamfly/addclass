@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <section class="todoapp">
+        <div>
+            <header class="header" >
+                <h1>todos</h1>
+                <input 
+                    class="new-todo" 
+                    placeholder="请输入内容" 
+                    @keyup.13="click13"
+                    v-model="attr"
+                    
+                >
+            </header>
+            <section class="main">
+                <input class="toggle-all" type="checkbox" @click="click5">
+                <ul class="todo-list">
+                    <!-- <li class="active">
+                        <div class="view">
+                            <input class="toggle" type="checkbox">
+                            <label>哈哈哈</label>
+                            <button class="destroy"></button>
+                        </div>
+                        <input 
+                            class="edit" 
+                        />
+                    </li> -->
+                    <li class="active" v-for="(val,key) in setary" @dblclick="dblclick(val)" >
+                        <div class="view" v-show="!val.onoff">
+                            <input class="toggle" type="checkbox" v-model="val.checked">
+                            <label>{{val.txt}}</label>
+                            <button class="destroy" @click="clickfalse(key)"></button>
+                        </div>
+                        <input 
+                        autofocus 
+                           :class="{'edit':!val.onoff}" 
+                           v-model="val.txt"
+                           
+                           @keyup.enter="keyup(val)"
+                           
+                        />
+                    </li>
+                </ul>
+            </section>
+            <footer class="footer">
+	            <span class="todo-count">
+	            	<strong>{{num2}}</strong>
+	            	<span>条未选中</span>
+                </span>
+                <ul 
+                    class="filters"
+                >
+                    <!-- <li>
+                        <a 
+                            href="#/all" 
+                            class="selected"
+                           
+                        >全部</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/unchecked" 
+                            
+                            class=""
+                        >未选中</a>
+                    </li>
+                    <li>
+                        <a 
+                            href="#/checked"
+                            class=""
+                        >已选中</a>
+                    </li>
+                     -->
+                     <li v-for="(val1,key) in ary2" @click="click4(val1,key)">
+                        <a 
+                            href="#/all" 
+                            :class="{selected:num==key}"
+                            
+                        >{{val1}}</a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+    </section>
+<script src="../../vue.js"></script>
+<script>
+    // editing completed
+    // editing ''
+    // ''
+    //completed
+ 
+    new Vue({
+        el:'.todoapp',
+        data:{ 
+            xsj:'',
+            onoff:true,
+            num2:1,
+            num:0,
+            ary2:['全选中','已选中','未选中'],
+            attr:"",
+            arry:'全选',
+            ary:[
+                {
+                    id:0,
+                    txt:'哈哈',
+                    checked:true,
+                    onoff:false
+                },
+                {
+                    id:1,
+                    txt:'呵呵',
+                    checked:false,
+                    onoff:false
+                }
+            ]
+        },
+        
+        methods:{
+            keyup(val){
+                val.onoff=false
+            },
+            change(xsj){
+                console.log( xsj);
+                
+                
+            },
+            dblclick(val){
+                val.onoff=true
+              
+                // this.ary.forEach(item=>item.onoff=true)
+                
+            },
+            click13(){
+                this.ary.unshift({
+                    id:new Date(),
+                    txt:this.attr,
+                    checked:false,
+                    onoff:false
+                })
+                this.attr=''               
+            },
+            clickfalse(num){
+                this.ary =this.ary.filter((item,i)=>i!==num)
+            },
+            click4(val1,key){
+
+                this.arry =val1
+            },
+            click5(){
+                if(this.onoff){
+                    this.ary.forEach(item=>item.checked=true)
+                }else{
+                    this.ary.forEach(item=>item.checked=false)
+                }
+                this.onoff =!this.onoff
+                
+            }
+        },
+            computed: {
+                setary:{
+                    get(){
+                        const {arry,ary}=this
+                        return ary.filter(item=>{
+                            switch(arry){
+                                case'全选' :
+                                   return item;
+                                case'已选中' :
+                                   return item.checked;
+                                case'未选中' :
+                                   return !item.checked;  
+                                   default:
+                                return item;
+                         
+                            }
+                        })
+                    }
+                    
+                }
+            },
+            watch: {
+                ary:{
+                handler(val,oldVal){
+                    this.num2 = this.ary.filter(item=>!item.checked).length
+                    
+                },
+                deep:true
+            }
+            },            
+    })
+</script>
+</body>
+</html>

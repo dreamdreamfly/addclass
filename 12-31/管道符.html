@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <input type="text" v-model="val">
+      <p>{{val | db}}</p>
+      <p>{{val | rever}}</p>
+
+
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+
+        /*
+        computed：
+           数据的第二次处理
+        管道符：（数据的第二次处理）
+           |
+           局部注册：
+              filters:{
+                  fn(val(管道符之前的值)){
+                      return 基于管道符之前的值进行二次处理
+                  }
+              }
+        
+        全局注册：
+          Vue.FILTER('名字',function(val(管道符之前的值)){
+              return 基于管道符之前的值进行二次处理
+          })
+
+        全局注册了之后，只要是当前Vue实例下的所有组件都能享受到这个全局注册的过滤器
+        局部注册，只有当前这个组件才能享受
+        */
+
+        //注册全局过滤器要放在new Vue的上边
+        Vue.filter("db",function(val){
+              console.log(val);
+              return val<10?'0'+val:''+val;
+        })
+    new Vue({
+        el:"#app",
+        data:{
+            val:''
+        },
+        filters:{
+            //如果和全局的名字一样，那么优先级最高的是局部的
+            rever(val){
+                return val.split('').reverse().join('')
+            }
+        }
+    })
+    
+    </script>
+</body>
+</html>

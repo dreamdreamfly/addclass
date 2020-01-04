@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 100px;
+            width: 100px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <button>按钮</button>
+    <div id="box"></div>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        /*
+        hide
+        show：也是动画的(可以加时间毫秒为单位)
+
+        在做jq动画的时候，记得使用stop(),把前面的动画过滤掉（因为jq动画执行是队列模式，如果猛点多次，没清除掉，不点以后还会执行）
+        
+        */
+        $(':button').on('click', function () {
+            // $(box).toggle(1000)//改变宽高，透明度按一次消失，在按一次会显示，来回切换
+            // $(box).hide(1000)
+            // $(box).fadeToggle(1000)//渐隐渐显，多安来回切换
+            // $(box).slideToggle(2000)//改变高度来回切换
+            $(box).stop().slideToggle(1000)
+        })
+
+    </script>
+</body>
+
+</html>

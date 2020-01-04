@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: slategrey;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            opacity: 0.1;
+        }
+    </style>
+
+</head>
+
+<body>
+        <div id="box"></div>
+    <script src="工具.js"></script>
+    <script>
+       box.onclick=function(){
+           move({
+               el:box,//运动的元素
+               attr:{//运动的属性,带不带单位都可以
+                   width:'300px',
+                   height:300,
+                   top:'300px',
+                   left:500,
+                   opacity:1
+               },
+               time:1000,//运动时间
+               fx:'elasticOut',//运动模式
+               cb:function(){
+                //运动完可以接着调用
+               }
+           })
+       }
+    </script>
+</body>
+
+</html>

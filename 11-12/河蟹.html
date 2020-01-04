@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="input">
+    <button id="btn">发送</button>
+    <ul id="ul">        
+    </ul>
+    <script>
+    // btn.onclick = function(){ 
+    //     let a =  input.value.replace(/我草|艹|你个脑残/g,function($0){
+    //         let item = ''
+    //      for(let i =0;i<$0.length;i++){
+    //        item +='*'
+    //      }
+    //      return item
+    //     })  
+               
+    //     ul.innerHTML = '<li>'+a+'</li>'+ul.innerHTML
+    //     input.value = ''
+    // }
+    btn.onclick = function(){
+         let value = input.value
+         let bnts = document.createElement('button')
+
+         bnts.innerText = '反和谐'
+        let li = document.createElement('li')
+        li.appendChild(bnts)
+        li.innerHTML = input.value.replace(/我草|艹|你个脑残/g,function($0){
+            let item = ''
+         for(let i =0;i<$0.length;i++){
+          item +='*'
+          }
+          return item
+        })  
+        li.appendChild(bnts)
+        bnts.onclick=function(){
+            li.innerHTML  = value
+        }
+       
+        ul.insertBefore(li,ul.children[0])
+        
+    }
+
+    </script>
+</body>
+</html>

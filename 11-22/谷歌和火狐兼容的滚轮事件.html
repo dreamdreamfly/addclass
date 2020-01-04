@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+
+        }
+    </style>
+</head>
+
+<body _style="height: 3000px;">
+    <div id="box">
+
+    </div>
+    <script>
+        /*
+        onscroll   滚动条改变的时候触发(前提得有滚动条)
+        onmousewheel 滚轮事件
+
+          ev.wheelDelta 检测滚动方向的
+             大于0就是向上
+             小于0就是向下
+
+        onmousewheel 滚轮事件    火狐不支持onmousewheel事件
+        火狐(FF)的滚轮事件(注意这个事件只能使用事件绑定的方式去写)：
+        window.addEventListener('DOMMouseScroll',function(ev){
+            if(ev.datail.>0){
+                console.log('向下')
+            }else{
+                console.log('向上')
+            }
+            
+        })
+        */
+        // window.onscroll = function(){
+        //     console.log(1);           
+        // }
+        // window.onmousewheel = function (ev) {
+        //     if (ev.wheelDelta > 0) {
+        //         console.log('上');
+        //         box.style.top = box.offsetTop - 10 + 'px'
+
+        //     }
+        //     if (ev.wheelDelta < 0) {
+        //         console.log('下');
+        //         box.style.top = box.offsetTop + 10 + 'px'
+        //     }
+        // }
+        //封装一个都兼容的滚轮事件
+
+        function addWheel(obj, cb) {
+
+            if (obj.onmousewheel === null) {//说明有这个事件
+                 obj.onmousewheel = listen
+            }else{
+                obj.addEventListener('DOMMouseScroll',listen)
+            }
+            function listen(ev){
+                let o =false//默认向下的
+                if(ev.wheelDelta){
+                    o= ev.wheelDelta>0?true:false;
+                }else{
+                    o = ev.datail<0?true:false;
+                }
+                cb.call(this,o)
+            }
+        }
+
+        addWheel(box, function (o) {
+       
+       
+            let { width,height} = getComputedStyle(this)
+            if (o) {
+                //向上做的事
+                this.style.width = parseFloat(width) +5+'px'
+                this.style.height = parseFloat(height) +5+'px'
+            }
+            else{//向下做的事
+                this.style.width = parseFloat(width)-5+'px'
+                this.style.height = parseFloat(height) -5+'px'
+            }
+        })
+    </script>
+</body>
+
+</html>

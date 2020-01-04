@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    ul{
+        list-style: none;
+    }
+    #ul{
+        width:100px;
+        border: 1px solid red;
+        position: absolute;
+        display: none;
+    }
+    ul li{
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        border-bottom: 1px dashed black;
+    }
+    #ul li:nth-child(4){
+        border: none;
+    }
+    #ul li:hover{
+        color: white;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <ul id="ul">
+        <li>我的电脑</li>
+        <li>我的主页</li>
+        <li>我的c盘</li>
+        <li>我的收藏</li>
+    </ul>
+    <script>
+    document.oncontextmenu =function(ev){
+        
+        ul.style.cssText = `display:block;top:${ev.clientY}px;left:${ev.clientX}px`
+        return false
+    }
+    ul.onclick = function(ev){
+        console.log(ev.target.innerText);
+        ev.cancelBubble= true//阻止冒泡行为
+        ul.style.display = 'none'
+        
+    }
+    document.onclick =function(){
+        ul.style.display = 'none'
+    }
+    </script>
+    
+</body>
+</html>

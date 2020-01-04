@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>    
+    <script>
+     const btns =document.querySelectorAll('button')
+     
+     for(var i=0;i<btns.length;i++){
+        function fn (aa){
+            btns[aa].onclick =function(){
+            alert(aa)
+        }        
+    }
+    fn(i) 
+    /* (function(aa){
+        btns[aa].onclick =function(){
+            alert(aa)
+    })(i)  
+     */
+
+     }
+     
+     console.dir(fn());
+     
+     
+    </script>
+</body>
+</html>

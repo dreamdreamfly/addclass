@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    *{
+    margin:0;
+    padding:0;
+}
+.active{
+    background: yellow;
+}
+#box div,#box2 div{
+    width:200px;
+    height:100px;
+    border:1px solid #000;
+    display: none;
+}
+#box div.show,#box2 div.show{
+    display: block;
+}
+    
+    </style>
+</head>
+<body>
+        <div id="box">
+                <button class="active" index="0">按钮一</button>
+                <button index="1">按钮二</button>
+                <button index="2">按钮三</button>
+                <div class="show">11111</div>
+                <div>22222</div>
+                <div>33333</div>
+        </div>
+        <script>
+        function Tab (id){
+            this.box = document.getElementById(id)
+            this.bnts = this.box.querySelectorAll('button')
+            this.divs = this.box.querySelectorAll('div')
+            this.pre = 0
+            
+        }
+        //给每一个按钮绑定事件
+        Tab.prototype.events = function(){
+            const _this = this
+            this.bnts.forEach(function(item,i){
+                item.onclick =function(){
+                    _this.change(this,i) //实例才能调用change方法，而此时的this是点谁是谁的按钮，需存储下
+                }
+            })
+        }
+        
+        Tab.prototype.change=function(index,j){
+             this.bnts[this.pre].className = ''
+             index.className = 'active'
+             this.divs[this.pre].className = ''
+             this.divs[j].className = 'show'
+             this.pre = j
+             
+        }
+        
+
+
+         let t = new Tab('box')
+         t.events()
+         
+         
+        
+        
+        </script>
+</body>
+</html>

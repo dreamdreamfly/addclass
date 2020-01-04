@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body id="body">
+    成功
+    <button id="btn1">美团</button>
+</body>
+<script src="../axios.js"></script>
+<script>
+btn1.onclick =async function(){
+
+    // fetch('/islogin').then(d=>d.json()).then(d=>{
+    //     console.log(d);
+        
+	//  	if(d.code == 0){
+	// 		p.innerHTML = '欢迎'+d.user+'回来';
+	// 	}else{
+	//  		window.location.href = '/';
+	// }
+	//  });
+    // // console.log('shibai');
+    
+    let a  =await axios.get('/islogin').then(({data})=>data)
+    
+   if(a.code==1){
+    window.location.href = '/';
+   }else{
+    let b  =await axios.get('/proxy').then(({data})=>data)
+    body.innerHTML =b
+   }
+   
+}
+
+</script>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="author" content="Reddy.Huang" />
+    <link rel="stylesheet" href="/public/css/reset.css">
+    <link rel="stylesheet" href="/public/css/register.css">
+    <title>Title</title>
+    <style>
+        h2 {
+            display: none;
+        }
+
+        #info {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="userInfo">欢迎回来,<span id="user"></span></h2>
+    <div class="form-wrapper">
+        <div class="banner"></div>
+        <!-- <form id="form"> -->
+        <div class="item-wrapper"><label for="username">登陆名</label><input type="text" name="username" id="username"
+                value="" placeholder="以字母开头,共5-10位"></div>
+        <div class="item-wrapper"><label for="password">密码</label><input type="password" name="password" id="password"
+                value=""></div>
+        <input type="button" value="登陆" id="submit">
+        <input type="button" value="注册" id="register">
+        <!-- </form> -->
+        <p id="info">请输入信息</p>
+    </div>
+    <script>
+            register.onclick =async function(){
+                
+                
+                let val1 =username.value
+                let val2= password.value
+                let data = await fetch('/api/user/register',{
+                    method:'post',
+                    body:`username=${val1}&password=${val2}`,
+                    headers:{'content-type': 'application/x-www-form-urlencoded'}
+                }).then(d=>d.json())
+                               
+                if(data.code===0){
+
+                    alert('cg')
+                    window.location.href='/'                
+                }else{
+                    alert(data.msg)
+                }
+                username.value=''
+                password.value=''
+            }
+
+            submit.onclick =async function(){
+                let val1 =username.value
+                let val2= password.value
+                let data = await fetch('/api/user/login',{
+                    method:'post',
+                    body:`username=${val1}&password=${val2}`,
+                    headers:{'content-type': 'application/x-www-form-urlencoded'}
+                }).then(d=>d.json())
+                console.log(data);
+                if(data.code===0){
+                    alert('欢迎'+val1+'回来')
+                    window.location.href ='/'
+                }else{
+                    alert(data.msg)
+                }
+                
+                username.value=''
+                password.value=''
+            }
+
+
+
+
+
+
+        // //用户名以字母开头中间可以是数字，字母，下划线共5-10位
+        // let re = /^[a-zA-Z]\w{4,9}$/i
+        // //注册
+        // register.onclick = function () {
+        //     let v1 = username.value;
+        //     let p1 = password.value;
+        //     if (re.test(v1)) {                                
+        //         //接口post不用加问号get用加问号
+        //         fetch('/api/user/register', {
+        //             method: 'post',
+        //             body: '' + new URLSearchParams({
+        //                 username: v1,
+        //                 password: p1
+        //             }),
+        //             headers: {
+        //                 'content-type': 'application/x-www-form-urlencoded'
+        //             }
+        //         }).then(b => b.json()).then(d => {
+        //             if (d.code === 0) {
+        //                 alert('恭喜注册成功')
+        //                 window.location.href ='/'
+
+        //             } else if (d.code === 1) {
+        //                 alert('用户名已存在')
+                        
+        //             }
+
+        //         })
+
+
+        //     } else {
+        //         alert("请正确输入用户名格式")
+        //     }
+        //     username.value=''
+        //     password.value=''
+        // }
+        // //登录
+        // submit.onclick = function(){
+        //     let v1 = username.value;
+        //     let p1 = password.value;
+        //     fetch('/api/user/login',{
+        //         method:'post',
+        //         body:''+new URLSearchParams({
+        //             username: v1,
+        //             password: p1
+        //         }),
+        //         headers: {
+        //                 'content-type': 'application/x-www-form-urlencoded'
+        //             }
+
+        //     }).then(d=>d.json()).then(b=>{                
+        //         if(b.code===0){
+        //             window.location.href ='/'
+        //             alert(`欢迎${v1}回来`)
+
+        //         }else if(b.code===-3){
+        //             alert(`${b.msg}`)
+        //         }
+                
+        //     })
+        //     username.value=''
+        //     password.value=''
+        // }
+
+
+
+
+    </script>
+</body>
+
+</html>

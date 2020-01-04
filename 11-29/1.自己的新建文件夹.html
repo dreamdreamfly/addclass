@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/2.css">
+</head>
+
+<body>
+    <button id="btn">新建文件夹</button>
+    <div>
+
+    </div>
+    <div id="box">
+        <!-- <div class="folder">
+                <img src="img/folder-b.png" alt="">
+                <input type="text" name="" id="">
+                <p>新建文件夹</p>
+        </div>
+        <div class="folder">
+                <img src="img/folder-b.png" alt="">
+                <input type="text" name="" id="">
+                <p>新建文件夹(1)</p>
+        </div> -->
+    </div>
+    <script>
+        let ary = [
+            {
+                id: 0,
+                titlt: '新建文件夹'
+            },
+            {
+                id: 1,
+                titlt: '新建文件夹(1)'
+            }
+        ]
+        // let num =1
+        function fn(ary) {
+            ary.forEach((item, i) => {
+                let txt = `<div class="folder">
+                <img src="img/folder-b.png" alt="">                
+                <p>${item.titlt}</p>
+                </div>`
+
+                box.innerHTML += txt
+                // box.children[i].children[1].style.display='none'
+                
+                
+
+            })
+        }
+        fn(ary)
+
+        
+        let c = 2
+        btn.onclick = function () {
+            let num = 1
+            let txt = `<div class="folder">
+                <img src="img/folder-b.png" alt="">
+                <input type="text" placeholder="请设置文件名">
+               
+                </div>`
+
+              
+                box.innerHTML +=txt
+                let int = box.children[c].children[1]
+                int.select()
+                let ary2 = ary.map(item => item.titlt)
+                int.onblur =function(){
+                    
+                    let nr = int.value 
+                    if(nr===''){
+                        nr='新建文件夹'
+                    }
+                    
+                    
+                                                                        
+                while (ary2.includes(nr)) {
+                
+                nr = nr.replace(/\(\d+\)/,'')+`(${num})`
+                num++
+                }
+                ary.push({
+                    id:new Date,
+                    titlt:nr
+                }
+                )
+                box.innerHTML =''
+                fn(ary)
+
+                c++        
+                } 
+          
+
+        }
+
+    </script>
+
+</body>
+
+</html>

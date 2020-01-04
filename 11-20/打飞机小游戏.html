@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 50px;
+            width: 50px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .box2{
+            background: darkgreen;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 22.5px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div ></div>
+    </div>
+    <script>
+
+        //注意给document添加onkeydown给box没法添加
+        document.onkeydown = function (ev) {
+            console.log(ev.keyCode);
+
+
+            if (ev.keyCode === 87) {
+                box.style.top = box.offsetTop - 10 + 'px'
+            }
+            if (ev.keyCode === 83) {
+                box.style.top = box.offsetTop + 10 + 'px'
+            }
+            if (ev.keyCode === 65) {
+                box.style.left = box.offsetLeft- 10 + 'px'
+            }
+            if (ev.keyCode === 68) {
+                box.style.left = box.offsetLeft + 10 + 'px'
+            }
+            if (ev.keyCode === 32) {
+                let box3 = document.createElement('div')
+                box3.className = 'box2'
+                box.append(box3)
+                setInterval(function(){
+                    box3.style.top = '-2000px'
+                })
+            }
+            
+
+        }
+    </script>
+</body>
+
+</html>

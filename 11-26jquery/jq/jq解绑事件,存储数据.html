@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        height: 100px;
+        width: 100px;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button>按钮</button>
+    </div>
+    <ul>
+        
+    </ul>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+
+        /*
+        问题：触发一次hover，就绑定一次click，触发的越多，绑定的就越多，当触发一次click就会执行多次的click事件
+        解决：绑一次解绑一次，始终保持一次click
+        
+        */
+    $('div').hover(function(){
+        /*
+        $(this).css('background','red');
+        $('button').off().click(function(){
+            console.log('发送请求');})
+        */
+       
+        $('button').off('click');
+        $(this).css('background','red');
+        $('button').click(function(){
+            console.log('发送请求');})
+    },function(){
+        $(this).css('background','skyblue')  
+    })
+
+
+    //存数据
+    let ary = ['xx1','xx2','xx3']
+    ary.forEach((item,i)=>{
+        let $li = $('<li>'+ ++i+'</li>');
+        $('ul').append($li)
+        $li.on('click',{data:item},function(ev){
+            console.log('我的名字叫'+ev.data.data);
+            
+        })
+        
+    })
+    </script>
+</body>
+
+</html>

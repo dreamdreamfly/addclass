@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #ul {
+            list-style: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul">
+
+    </ul>
+    <script>
+        let ary = ['green', 'red', 'yellow', 'pink'];
+        const h = window.innerHeight;
+        const w = window.innerWidth;
+        let html = ary.map(item => `<li style="width:${w}px;height:${h}px;background:${item}"></li>`).join(' ')
+        ul.innerHTML = html
+
+        function addWheel(obj, cb) {
+
+            if (obj.onmousewheel === null) {//说明有这个事件
+                obj.onmousewheel = listen
+            } else {
+                obj.addEventListener('DOMMouseScroll', listen)
+            }
+            function listen(ev) {
+                let o = false//默认向下的
+                if (ev.wheelDelta) {
+                    o = ev.wheelDelta > 0 ? true : false;
+                } else {
+                    o = ev.datail < 0 ? true : false;
+                }
+                cb.call(this, o)
+            }
+        }
+        let num = 0
+        addWheel(document,function(o){
+           if(o){
+                num--
+                if(num<0){
+                    num=0
+                }
+                
+           }
+           else{
+               num++
+               if(num>ary.length-1){
+                num=ary.length-1
+               }
+               
+           }
+           ul.style.top = -num*h+'px'
+        })
+
+    </script>
+</body>
+
+</html>

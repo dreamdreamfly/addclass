@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #box{
+        height: 100px;
+        width: 100px;
+        background: red;
+    }
+    </style>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+    <button id="btn1">按钮</button>
+    <button id="btn2">按下</button>
+    <button id="btn3">抬起</button>
+</body>
+<script>
+   Object.prototype.changan = function  (cb){
+   let  timer;
+   this.onmousedown = function(){
+       let time = new Date();
+       timer = setInterval(()=>{
+           let now = new Date
+           if(now-time>1000){
+            //    console.log('长按');
+               cb()
+           }
+           
+       })
+       
+   }
+   this.onmouseup = function(){
+       clearInterval(timer)
+   }
+   }
+   let num  = 1
+   btn2.changan (
+       function(){
+        num -= 0.01
+        box.style.opacity = num
+       }
+   )
+    
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" >
+
+        <app :cnum="num"></app>
+    </div>
+    <template id="app" >
+        <div>
+             <ul>
+                 <li v-for="(val,key) in ary">{{val}}{{cnum}}</li>
+             </ul>
+             <!-- <ul>
+                <li v-for="(val,key) in ary2">{{val}}</li>
+            </ul> -->
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    
+    <script>
+        /*
+        1给父级增加一个provide属性里面放的是传递的数据
+        子组件通过inject属性接受，是个数组，名字一样，直接用即可
+
+
+
+        2给子集组件添加一个created的方法，里面通过父级的实例点上想获取的数据名即可
+        */
+        const app ={
+            template:"#app",
+            data(){
+                return {
+                    ary:[1,2,3],
+                    // cc:''
+                }
+            },
+            // inject:['ary2'],
+            props:['cnum'],
+            // created() {
+            //    this.cc=this.$parent.num
+                
+            // },
+        }
+    new Vue({
+        el:"#box",
+        data:{
+            num:0,
+           
+        },
+        // provide:{
+        //     ary2:[11,22,33]
+        // },
+        components:{
+            app
+        }
+    })
+    </script>
+</body>
+</html>

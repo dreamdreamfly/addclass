@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  
+    function Foo() {
+        getName = function () {console.log(1);};//window下的
+        return this;
+    }
+    Foo.getName = function () {console.log(2);}; 
+    Foo.prototype.getName = function () {console.log(3);};
+    // var getName = function () {console.log(4);};  
+    function getName() {console.log(5);} 
+
+    Foo.getName(); //2
+    getName();//4
+    Foo().getName(); //1
+    getName();1
+    var a = new     Foo.getName(); //2 Foo.getName{} 构造函数getName的实例
+    var b = new Foo()   .getName();  // 3 undefinde
+    var c = new   new Foo().getName  // 3 Foo.getName{} Foo实例下的getName的实例
+    console.log(a,b,c);
+</script>
+</body>
+</html>

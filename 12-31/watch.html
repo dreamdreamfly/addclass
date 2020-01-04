@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li @click="fn">{{num}}</li>
+            <li v-for="(val,key) in setary" @click="fn1(val.age)">{{val.name}}:{{val.age}}</li>
+        </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        /*
+        computed和watch的区别？
+        都是监听data里面的数据，但是computed是上来就触发一次，改变后还会触发，但是watch只有改变后才能触发，
+        computed不能具体的监听哪一个数据改变了，watch可以
+        watch的默认跟computed一样但是watch设置也可以鉴定深度的数据
+        
+        */
+    new Vue({
+        el:"#box",
+        data:{
+            num:10,
+            ary:[
+                {name:'hxy',
+                age:18}
+               
+            ]
+        },
+        methods: {
+            fn(){
+                ++this.num
+            },
+            fn1(){
+               this.ary.forEach(item=>item.age +=1)
+            }
+        },
+        computed: {
+            
+            setary:{
+                get(){
+
+                    return this.ary
+                }
+            }
+        },
+        watch: {
+            //可以分别监听里面的每一个数据,默认是只能监听第一层（简单数据类型的）
+              num(){
+                  console.log('chufale');
+                  
+              },
+            //   ary(){
+            //       console.log('cfl');
+                  
+            //   },
+            ary:{
+                //watch   handler固定写法 
+                handler(val,oldVal){
+                    console.log(val,oldVal);
+                    
+                },
+                //深度监听
+                deep:true
+            }
+              
+        },
+    })
+    </script>
+</body>
+</html>

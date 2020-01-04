@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" class="active"></div>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <input type="checkbox">
+    
+    
+    <ul class="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(':button:eq(0)').click(function(){
+            console.log($(':checkbox').attr('checked',true));            
+        })
+        $(':button:eq(1)').click(function(){
+            console.log($(':checkbox').attr('checked',false));            
+        })
+        $(':button:eq(2)').click(function(){
+            console.log($(':checkbox').prop('checked'));
+            
+            //$(':checkbox').attr('checked') === true不可以 因为没有选上的时候是undefined，选上是checked可以用$(':checkbox').prop('checked')是一个布尔值作为判断
+           
+            if( $(':checkbox').attr('checked')){
+                $(':checkbox').attr('checked',false)
+            }
+            else{
+                $(':checkbox').attr('checked',true)
+            }          
+        })
+       
+        
+        
+     
+    
+    </script>
+</body>
+</html>

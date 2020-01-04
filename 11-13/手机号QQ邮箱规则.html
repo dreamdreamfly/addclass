@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        验证手机:
+            11位
+            都是数字
+            1开头
+            第二位是3456789
+            +9位数        
+        */
+        let str = '13345678911'
+        console.log(/^1[3-9]\d{9}$/.test(str));
+
+
+
+
+        /*
+        验证QQ号:
+            不能以0开头
+            不能为字母
+            最少5位，最多11位
+        */
+        let str1 = '125420926'
+        console.log(/^[1-9]\d{4,10}$/.test(str1));
+
+        /*
+        邮箱的:
+        字母开头
+        @
+        .
+        结尾com|cn{1,2}
+        
+        */
+        let str2 = 'xxx._32@hotmail.cn'
+        console.log(/^[a-zA-Z][\d\D]{4,9}@[a-zA-Z\d]{2,8}(\.c(om|n)){1,2}$/.test(str2));
+        /*
+        QQ邮箱
+        不能以0开头
+        不能为字母
+        最少5位，最多11位
+        @qq.com|cn{1,2}
+        */
+        let str3 = '1125426@qq.com'
+        console.log(/^[1-9]\d{4,10}@qq(\.c(om|n)){1,2}$/.test(str3));
+        
+    </script>
+</body>
+
+</html>

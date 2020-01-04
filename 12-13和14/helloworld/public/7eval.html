@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <button id="btn">变</button>
+    <script>
+
+        //xss攻击
+        /*
+        href,src,style,location
+        */
+        // let re = /href|src|style|location/
+        // btn.onclick=function(){
+            // if(re.test(txt.value)){
+            //     alert('非法')
+            // }else{
+                //console.log(eval('('+txt.value+')'));
+            // }
+        //}
+        //eval的缺点是可以注入病毒，但是都在用可以使用
+        /*
+        在input里输入window.location='某个网站'或者输入document.documentElement.style.background='red'
+        */
+    let val = '1'
+    let val2 = '+'
+    let val3 = '2'
+    // console.log(eval(val+val2+val3)); //尽量把能够转成js运行的代码尽量转了
+    // let ary ='[1,2,3,4]'
+    // let json='{"name":"1"}'
+    // console.log(eval('('+json+')'));//eval低版本也支持
+
+    console.log(new Function('a,b','return a+b')(1,2));
+    console.log(new Function('','return'+'{name:1}')());
+    
+    
+    
+    
+    </script>
+</body>
+</html>

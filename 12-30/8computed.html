@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="val">
+        <p> {{fn}}</p>
+        <!-- <ul>
+            <li v-for="(val,key) in fn1()" @click="click(val)">{{val}}</li>
+        </ul> -->
+    </div>
+    
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:"#box",
+        data:{
+            val:'珠峰培训'
+        },
+        // computed: {
+        //     fn(){
+        //         return this.num.map(item=>++item)
+        //     }
+        // },
+        //需要上来先执行一次
+        methods: {
+            fn1(){
+                return this.val.split('').reverse().join('')
+                
+            }},
+            //上来就执行一次，当数据发生改变也会继续执行
+        computed: {
+                fn(){
+                    return this.val.split('').reverse().join('')
+                }
+            },
+    })
+    </script>
+</body>
+</html>

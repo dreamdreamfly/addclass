@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body style="height: 3000px;">
+    <div id="box"></div>
+    <script>
+        /*
+        拖拽事件组成：
+        onmousedown
+        onmousemove
+        onmouseup
+        先要触发down再触发move和up，也就是说move和up在down里面
+        */
+        box.onmousedown = function (ev) {
+           
+            let disX = ev.pageX - box.offsetLeft
+            let disY = ev.pageY - box.offsetTop
+            document.onmousemove = function (ev) {
+                box.style.top = ev.pageY-disY+'px'
+                box.style.left = ev.pageX - disX+'px'
+            }
+            document.onmouseup = function(){
+                document.onmousemove =null
+                document.onmouseup=null
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <div id="div1">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+            <input type="checkbox">
+    </div>
+    
+    <div id="div2"><input id="checkbox1" type="checkbox">全选</div>
+    
+    <script>
+
+        const inputs = document.querySelectorAll('#div1 input')
+        let a =[]
+        inputs.forEach(function(item,i){           
+               a.push(item.checked)                
+               inputs[i].onclick=function(){
+               a[i]= inputs[i].checked
+               if( a.every(items=>items)){checkbox1.checked =true}
+               else{checkbox1.checked =false}
+               }
+               })
+        checkbox1.onclick=function(){
+            if(checkbox1.checked){
+            inputs.forEach(function(item1){
+                item1.checked = true
+            })
+         }
+         else{
+             inputs.forEach(
+                function(item1){
+                item1.checked = false}
+             )
+         }
+        }
+         
+           
+        
+        
+    
+
+    
+ 
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <button @click="fn1">父级按钮{{num}}</button>
+        <hr>
+        <btn 
+        :cnum="num"
+        
+        @child="fn"
+        ></btn>     
+    </div>
+ 
+
+    
+   <!-- 注册组件 -->
+    <template id="temp">
+        <div > 
+            <button @click="add">局部组件{{aa}}</button>
+            
+        </div>
+    </template>  
+    <script src="vue.js"></script>
+    <script>
+        /*
+        子级拿到父级的数据变成自己的，不与父级关联
+       1通过子组件的属性来传递
+       2使用props接收
+       3把接收过来的数据变成自己的
+        */
+        const btn = {
+           template:"#temp",
+           
+            props:['cnum'],
+            data(){
+                return {
+                    aa:this.cnum
+                }
+            },
+            methods: {
+                add(){
+                    this.aa +=2
+                    // this.$emit('child',this.aa) 传参来改变父级数据
+                } 
+            },
+           
+            
+        }
+        
+        new Vue({
+            el: "#box",
+            data: {
+                num: 10,
+                
+                
+            },
+            methods: {
+                fn1(){
+                    this.num++
+                },
+                // fn(val){
+                //     this.num=val
+                // }
+            },
+            components: {
+                btn
+            }
+        })
+       
+
+    </script>
+</body>
+
+</html>

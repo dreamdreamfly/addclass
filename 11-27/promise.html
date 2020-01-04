@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        js可同步和异步
+
+        同步 ->主线程
+        异步 ->异步队列
+
+        异步的编程哪里不好？
+        代码不是单纯从上往下阅读，要考虑到同步异步的情况，会干扰判断如果用回调函数的方式去解决，那么有可能出现回调地狱
+        从上往下的阅读方式，方便开发人员调试和判断
+
+        promise解决异步的编程问题
+        
+        Promise->承诺
+    
+        使用方法：    
+        new Promise((resolve,reject)=>{
+            //放入异步代码，把异步代码的结果放到resolve或者reject身上
+        })
+    
+        虽然promise解决了异步编程的问题，但是在then的外面还是异步的
+        promise是否是必备的？？？
+
+        不是的，没有promise也能进行开发，只不过维护起来麻烦点
+
+        Promise 新建（new Promise）后就会立即执行。.then里面才是微任务
+
+        new Promise是从pending（进行中）状态改变为成功或者失败，而且状态一旦改变就会凝固，不变了。then中包含2个函数，当返回的Promise对象的状态是resolved（成功）状态第一个函数执行，是rejected（失败）状态的时候第二个函数执行
+        finally：不管成功还是失败都会进的回调函数
+
+        正常情况下如果代码出现报错，报错下面的代码不会执行，但是使用try，catch那么try中的代码报错会进catch，报错是不会影响后面代码执行的
+        try{}catch(e){e//代表报错的参数}
+
+        第一个then的返回值，就是第二个then的参数
+        fetch（）.then（function（d）｛
+        return d.jison()｝）
+        .then（function(d){
+            console.log(d)
+        }）
+        当进第一个then的时候，d就是返回的数据，但是这个数据是被promise包了一层
+        d.json()->'[]'->[]
+        JSON -> 数据结构，长的像对象和数组的字符串，本质是字符串
+        '[]'JSON -> []数组
+        '{}'JSON -> {}对象
+
+        JSON取值是不方便的，可以使用JSON.parse()，把JSON转成对象
+        JSON.parse()里面放的必须是标准JSON格式的(外面是单引号里面对象的key和value是双引号)：
+        '{"name":"xxx"}'
+        '[]'->[]
+        对象转JSON-> JSON.stringify()的副作用是函数和undefined会被过滤掉
+        []->'[]'
+
+
+        promise.all([promise实例1,promise实例2...])  所欲的promise实例都成功才算成功，只要有一个失败就都失败
+        promise.race([promise实例1,promise实例2...]) 只要有一个成功就成功
+        
+        let p =Promise.resolve();成功promise实例
+
+        then里面是数字会穿透
+        */
+
+        
+
+        // let a = 10
+        // let p = new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         a = 20;
+        //         try{
+        //             b
+        //         }catch(e){reject(e)}
+                
+        //     }, 2000)
+        // })
+        // p.then(function(a){
+        //     console.log(a);
+            
+        // },function(){console.log('失败');
+        // })
+
+        //pending
+        // let p = new Promise((resolve,reject)=>{
+        //     setTimeout(()=>{
+        //         resolve({
+        //             data:'{"name":"珠峰"}',
+        //             json:function(){
+        //                 return  JSON.parse(this.data)
+        //             }
+
+        //         })
+                
+        //     },2000)
+        // })
+        // p.then(function(d){
+        //  return d.json()
+        // }).then(function(d){
+        //     //'{"name":"珠峰"}'->json是个字符串，把json转成对象使用JSON.parse（）
+        //     console.log(d);
+            
+        // })
+
+        
+
+
+    </script>
+</body>
+
+</html>

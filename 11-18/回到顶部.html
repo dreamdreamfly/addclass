@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #body {
+            height: 3000px;
+        }
+
+        #box{
+            height: 20px;
+            line-height: 20px;
+            width: 70px;
+            text-align: center;
+            border: 1px solid red;
+            position: absolute;
+            top:100%;
+            right: 0;
+            cursor: pointer;
+            
+        }
+    </style>
+
+</head>
+
+<body id="body">
+    <div id="box">回到顶部</div>
+    <script>
+    const {offsetTop}=box
+    window.onscroll = function(){
+       let  {scrollTop} = document.documentElement
+       //当滚动距离大于绝对定位距离的时候，跑到中间
+       if(scrollTop>=offsetTop){
+           box.style.position='fixed';
+           box.style.top = '50%'
+       }
+       else{
+           box.style.position='absolute';
+           box.style.top = '100%'
+       }
+       
+        
+    }
+    box.onclick = function(){
+         document.documentElement.scrollTop = 0
+       
+    }
+    
+    </script>
+</body>
+</html>

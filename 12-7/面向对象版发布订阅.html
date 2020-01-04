@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn"> 点击</button>
+    <script>
+    class O {
+        constructor(){
+            this.subscribe = {}//大的订阅池
+        }
+        add(obj,evName,fn){
+            this.subscribe[evName]=this.subscribe[evName]||[]
+            this.subscribe[evName].push(fn)
+        }
+
+        publish(obj,evName){
+            if(!this.subscribe[evName]) return null;
+            this.subscribe[evName].forEach(item=>item.call(obj))
+        }
+        removeEvent(obj,evName,fn){
+            if(!this.subscribe[evName]) return null;
+            for(let i=0;i<this.subscribe[evName].length;i++){
+                if(this.subscribe[evName][i]===fn){
+                    this.subscribe[evName].splice(i,1);
+                    break
+                }
+            }
+        }
+    }
+
+    let o = new O;
+
+    // function fn(){
+
+    //     let aaa =10;
+
+        o.add(btn,'kacha',function(){
+            alert(1)
+            function a(){
+                alert('aa')
+                aaa=20
+            }
+            a()
+        })
+        o.add(btn,'kacha',function(){
+            alert('2');
+            function a (){
+                alert('ba')
+                aaa==30
+            }
+            a()
+
+        })
+    // }
+    // fn()
+    btn.onclick = function(){
+        o.publish(btn,'kacha')
+    }
+    
+    </script>
+</body>
+</html>

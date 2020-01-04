@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+       
+</head>
+
+<body>
+    <ul>
+
+    </ul>
+    
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+      //jq的循环
+       let arr = {
+           name:'xxx',
+           age:12
+       }
+       
+       $.each(arr,function(i,item){console.log(i,item)})
+       //第一个参数是：要循环的对象
+       //第二个参数是：函数,函数中的第一个参数是索引，第二个参数是每一项
+
+    //在jq中数据请求，固定模式：
+    // url是有域名，接口，参数组成
+    //https://www.baidu.com/s?id=12345&user=lilei&pass=123;（后台告知的链接）
+
+    $.ajax({
+        method:'post',
+        url:'https://www.baidu.com/s?',
+        data:{id:12345,
+            user:'lilei',
+            pass:123},//必要的参数后台会告知
+        dataType:'jsonp',//数据类型，后台会告知的
+        success:function(a){
+            console.log(a);//拿到的数据
+        }
+    })
+    //jq的深浅克隆
+    let ary  =[2,3,4,5]
+    let ary2 = $.extend([],ary)
+    console.log(ary2); //浅克隆
+    let ary3 = [1,2,3,[5,6],7]
+    let ary4 = $.extend(true,[],ary3)//深度克隆
+    
+    
+    
+    
+
+    </script>
+</body>
+
+</html>

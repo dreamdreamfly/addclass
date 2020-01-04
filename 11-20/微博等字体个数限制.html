@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>   
+</head>
+<body >
+   <input type="text" id="it" maxlength="20"><span id="sp">0</span>/20字
+   <script>
+   it.oninput = function(){
+    sp.innerText = this.value.length
+    // if(this.value.length===21){
+    //     alert('字体个数已超出')
+    // }//或者用html的maxmaxlength的属性也可以
+   }
+   
+   </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="axios.js"></script>
+    <script>
+
+        /*
+        并发：
+        axios.all([a,b]).then(axios.spread(function(a,b){
+            //a和b执行完
+        }))
+        请求拦截：（interceptors requst）是指可以拦截每次或者指定http请求，并可以修改配置项
+        响应拦截器：（interceptors response）可以在每次http请求后拦截住每次或指定http请求，并可以修改返回的结果项。
+        
+        */
+    //a执行完b在执行,7秒（时间是两个请求之和）
+    // document.onclick = async function(){
+    //     let a =await axios.get('/a')
+    //     let b =await axios.get('/b')
+    //     let c= await axios.get('/c?user='+a.data.user+'&iphone='+b.data.iphone).then(({data})=>data)  
+    //     console.log(c);
+              
+    // }
+
+
+    // //一起请求，5秒完成（时间是两个请求中的最大着 ）
+    // document.onclick =function(){
+    //     axios.all([axios.get('/a'),axios.get('b')]).then(axios.spread((res1, res2)=>{
+    //         // console.log(res1,res2);//res1第一个请求的返回值res1.data是我们想要的，res2第二个请求的返回值
+    //         axios.get('/c?user='+res1.data.user+'&iphone='+res2.data.iphone).then(d=>{
+    //             console.log(d);
+                
+    //         })           
+    //     }))
+    // }
+   
+    </script>
+
+</body>
+</html>

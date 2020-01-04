@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <button @click="fn">父级按钮{{num}}</button>
+        <hr>
+        <btn 
+        :cnum="num"
+        
+        @child="fn"
+        ></btn>     
+    </div>
+ 
+    
+    
+   <!-- 注册组件 -->
+    <template id="temp">
+        <div > 
+            <button @click="add">局部组件{{name}}{{cnum}}</button>
+            
+        </div>
+    </template>  
+    <script src="vue.js"></script>
+    <script>
+        /*
+        子传父
+        1父级需要定义一个改变自己数据的方法
+        2在定义子组件中定义一个事件，在事件中去调用自定义的方法（this.$emit('child')）
+        3在使用子组件中的行间绑定子级的事件（第二步自定义的），值为父级的修改数据的方法
+        */
+        const btn = {
+           template:"#temp",
+            data() {
+                return {
+                    name: 'xxx'
+                }
+            },
+            props:['cnum'],
+            methods: {
+                add(){
+                    this.$emit('child')
+                }
+            },
+            
+        }
+        
+        new Vue({
+            el: "#box",
+            data: {
+                num: 10,
+                
+                
+            },
+            methods: {
+                fn(){
+                    this.num++
+                }
+            },
+            components: {
+                btn
+            }
+        })
+       
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <!-- multiple支持上传多个文件 -->
+    <input id="txt" type="file" multiple>
+    <button id="btn">获取</button>
+    <script>
+    /*
+    如何拿到用户传入的数据
+
+    在file控件元素下有一个files属性，files[0]就是上传的第一个文件数据
+    */
+    btn.onclick = function(){
+        console.log(txt.files[0]);
+        
+        
+    }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            padding: 30px;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="h1"></h1 id="h1">
+    <div id="box">
+        注册的用户名:<input id="user" type="text" /><span id="s"></span>
+        注册的密码:<input type="password" id="pw" />
+        <button id="btn">登录</button>
+
+    </div>
+
+
+    <ul id="ul">
+
+    </ul>
+    <script>
+        /*
+        刷新之后还有数据(数据是不变的)
+        1刷新之后请求一次数据
+    
+    
+        2把数据存储在浏览器中
+    
+          cookie
+             - 后端技术，基于浏览器实现的(一般都是后端来设置，也可以前端来种)
+             - 用来存储用户的操作信息
+             - 一次http请求（填写用户名密码），后端只知道这次请求某人是否合法，也就是说http是无状态的，不能记录某人登陆过账户所以说使用cookie去存储某个人操作，下次请求的时候，把上一次的操作发给后端，就知道某人是否登录过账户
+          localStorage
+          sessionStorage
+    
+    
+        */
+        // ajax('data.xml',{
+        //     dataType:'xml'
+        // }).then(d=>{
+        //             const person = d.getElementsByTagName('person');
+        //             let temp = '';
+        //             for(let i=0;i<person.length;i++){
+        //                 temp += `<li>我的名字叫:${person[i].children[0].innerHTML},今年${person[i].children[1].innerHTML}岁,我想说:${person[i].children[3].innerHTML}</li>`
+        //             }
+        //             ul.innerHTML = temp;
+
+        // })
+
+        //console.log(document.cookie);//读操作
+        // document.cookie = 'user=lilei'
+        // document.cookie = 'name=hyw' //写操作
+        // console.log(document.cookie)//读操作
+
+        // let o = new Date();
+        // o.setDate(o.getDate()+1)
+        // document.cookie='name=hyw; expires='+o
+        /*
+        读操作需要注意的是，一次读取会把当前域名下的所有cookie都获取出来
+        格式：'key=value; key2=value2' 分号后面有空格
+        */
+
+        /*
+        cookie的生命周期
+            默认的生命周期是当浏览器关闭，生命就结束
+    
+            如果不要走默认的，设置生命周期使用expires
+    
+            expires=需要设置的时间
+    
+            let o=new Date();
+    
+            o.setDate(o.getDate()+1)//比当前时间多一天
+            document.cookie = 'name=hyw; expires='+o
+    
+    
+            cookie，在以前每个域名只能设置几个或者几十个（根据浏览器的厂商设置的） 现在据说有5M  
+            cookie必须使用服务器环境
+       */
+
+        //设置cookie
+        function setCookie(key, value, time) {
+            if (time) {
+                let o = new Date();
+                let attr = Object.keys(time)[0]
+                let key1 = attr[0].toUpperCase() + attr.substr(1); o['set' + key1](o['get' + key1]() + time[attr])
+                //    o.setDate(o.getDate()+time)                
+                document.cookie = key + '=' + value + '; expires=' + o
+            } else {
+                document.cookie = key + '=' + value
+            }
+
+        }
+        setCookie('name', 'hyw', {
+            date: 10
+        })
+
+        let sql = [{
+            user: 'hyw',
+            pw: 123
+        },
+        {
+            user: 'ydz',
+            pw: 321
+        }]
+        let c = document.cookie;
+        c.split('; ').forEach(item => {
+            let ary = item.split('=')
+            if (ary[0] === 'user') {
+                h1.innerHTML = '欢迎' + ary[1] + '回来'
+                box.style.display = 'none'
+            }
+        })
+
+
+
+        btn.onclick = function () {
+            let val1 = user.value
+            let val2 = pw.value
+            let o = sql.find(item => item.user === val1)
+            if (o) {
+                if (o.pw === val2 * 1) {
+                    alert('cg')
+                    document.cookie = 'user=' + o.user
+                    window.location.reload()
+                } else {
+                    alert('用户名或密码错误')
+                }
+
+            } else {
+                alert('请注册')
+            }
+
+
+
+        }
+        // 获取cookie
+        function getCookie(key) {
+            let attr;
+            let c = document.cookie;
+            c.split('; ').forEach(item => {
+                let ary = item.split('=')
+                if (ary[0] === key) {
+                    attr = ary[1]
+                }
+            })
+            return attr
+        }
+//删除cookie 把生命周期设置成以前的时间即可
+function removeCookie(key,value){
+    setCookie(key, value, {
+            date: -20
+        })
+}
+removeCookie('name','hyw')
+removeCookie('user','hyw')
+console.log(getCookie('name'));
+
+
+    </script>
+</body>
+
+</html>

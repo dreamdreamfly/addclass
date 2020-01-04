@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box2 {
+            height: 100px;
+            width: 100px;
+            background: red;
+            position: absolute;
+            cursor: move;
+            display: none;
+            opacity: .3;
+            display: none;
+            left: 0;
+            top: 0;
+        }
+
+        #box {
+            height: 350px;
+            width: 350px;
+            border: 1px solid black;
+            position: relative;
+            float: left;
+        }
+
+        #box3 {
+            height: 500px;
+            width: 500px;
+            border: 1px solid black;
+            overflow: hidden;
+            float: left;
+            position: relative;
+            display: none;
+        }
+
+        #tp2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <img id="tp" src="1.jpg" alt="">
+        <div id="box2">
+        </div>
+    </div>
+    <div id="box3">
+        <img id="tp2" src="2.jpg" alt="">
+    </div>
+
+
+
+</body>
+<script>
+
+    box.onmouseenter = function () {
+        box2.style.display = box3.style.display = 'block'
+    }
+    box.onmouseleave = function () {
+        box2.style.display = box3.style.display = 'none'
+    }
+    box.onmousemove = function (ev) {
+        let zdt = box.clientHeight - box2.clientHeight
+        let zdl = box.clientWidth - box2.clientWidth
+       
+       
+        
+        let t = ev.clientY - box2.clientHeight / 2
+        let l = ev.clientX - box2.clientWidth / 2 
+        if (t < 0) {
+            t = 0
+        } else if (t > zdt) {
+            t = zdt
+        }
+        if (l < 0) {
+            l = 0
+        } else if (l > zdl) {
+            l = zdl
+        }
+        box2.style.top = t +'px'
+        box2.style.left = l+'px'
+        let {top,left} = box2.getBoundingClientRect()
+       
+        console.log(left/zdl,l/zdl);
+        
+        
+        zdl2 = tp2.clientWidth-box3.clientWidth
+        zdt2 = tp2.clientHeight-box3.clientHeight
+       
+        let leftbili = zdl2/zdl
+        let topbili = zdt2/zdt
+        // console.log(top,left,top*topbili,left*leftbili);
+        console.log(left*leftbili);
+        
+        tp2.style.left = `-${left*leftbili}px`
+        tp2.style.top = `-${top*topbili}px`
+
+    }
+    
+
+
+</script>
+
+</html>

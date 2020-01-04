@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 50px;
+            width: 50px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box2 {
+            background: darkgreen;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 22.5px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div></div>
+    </div>
+    <script>
+
+
+        /*
+        1做到切换按键的时候不卡
+        因为：卡顿是系统自带的，为了用户优化，防止不小心触碰到键盘导致输入很多内容
+        2两个键按下时斜着跑
+        */
+        let e = 0
+        let obj = {}
+        document.onkeydown =function(ev){
+            e = ev.keyCode
+            obj[e]=true
+        }
+        let timer
+        //定时器一直开着，只要满足条件就执行，可以两个键一起按,斜着走
+        timer = setInterval(() => {
+            console.log(obj);
+            
+            if (obj[87]) {
+                box.style.top = box.offsetTop - 10 + 'px'
+            }
+            if (obj[83]) {
+                box.style.top = box.offsetTop + 10 + 'px'
+            }
+            if (obj[65]) {
+                box.style.left = box.offsetLeft - 10 + 'px'
+            }
+            if (obj[68]) {
+                box.style.left = box.offsetLeft + 10 + 'px'
+            }
+            if (obj[32]) {
+                let box3 = document.createElement('div')
+                 box3.className = 'box2'
+                 box.append(box3)
+                 setInterval(function(){
+                     box3.style.top = '-2000px'
+                 })
+             }      
+
+        },16.7)
+        document.onkeyup =function(ev){
+            e = ev.keyCode
+            obj[e]=false
+        }
+
+
+    //    let timer
+    //     document.onkeydown = function (ev) {
+    //      clearInterval(timer)
+    //               //按键只能执行一个，同时按下，后面的会把下面的覆盖，不能斜着走
+    //        timer = setInterval(()=>{
+    //         if (ev.keyCode === 87) {
+    //             box.style.top = box.offsetTop - 10 + 'px'
+    //         }
+    //         if (ev.keyCode === 83) {
+    //             box.style.top = box.offsetTop + 10 + 'px'
+    //         }
+    //         if (ev.keyCode === 65) {
+    //             box.style.left = box.offsetLeft- 10 + 'px'
+    //         }
+    //         if (ev.keyCode === 68) {
+    //             box.style.left = box.offsetLeft + 10 + 'px'
+    //         }
+    //         if (ev.keyCode === 32) {
+    //             let box3 = document.createElement('div')
+    //             box3.className = 'box2'
+    //             box.append(box3)
+    //             setInterval(function(){
+    //                 box3.style.top = '-2000px'
+    //             })
+    //         }               
+    //        })          
+    //     }
+    //     document.onkeyup =function(){
+    //         clearInterval(timer)
+    //     }
+
+
+    </script>
+</body>
+
+</html>
