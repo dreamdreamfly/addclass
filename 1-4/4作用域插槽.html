@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+    <app :data="ary">
+        <template
+        v-slot:cadata="aa" >
+        <!-- {{aa}} -->
+        <h2>我的名字是{{aa.nn}}</h2>
+        <p>我的年龄是{{aa.age}}</p>
+            
+        </template
+        >
+
+    </app>
+    </div>
+    <template id="app" >
+        <div>
+            <ul>
+                <li v-for="(val,key) in data">
+                    <slot
+                    name="cadata"
+                    :nn="val.name"
+                    :age="val.age"
+                    
+                    >
+                    {{val.name}}
+                    </slot
+                    >
+                </li>
+            </ul>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+    /*
+    作用域插槽
+       在子级的slot中
+         1定义一个name="唯一个标识符"
+         2通过v-bind去传入使用的数据
+       在父级template中
+        1v-slot:name标识符="自定义的名字"
+           v-slot:可以缩写为#
+        2使用自定义的名字.xx
+         <slot name="cc"
+         :age="index"
+         >
+
+        <template #cc="cdata">
+            {{cdata.age}}
+            </template>
+
+    */
+   const app ={
+       template:"#app",
+       props:['data']
+   }
+   new Vue({
+       el:"#box",
+       data:{
+           ary:[
+                {
+                    name:'李磊',
+                    age:18,
+                    id:0
+                },
+                {
+                    name:'刘艳旭',
+                    age:8,
+                    id:1
+                },
+                {
+                    name:'彭锦程',
+                    age:30,
+                    id:2
+                }
+            ]
+       },
+       components:{
+           app
+       }
+   })
+    
+    </script>
+</body>
+</html>

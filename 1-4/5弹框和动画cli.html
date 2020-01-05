@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #box{
+        position: relative;
+    }
+    #shadow{
+     height: 100vh;
+     width: 100vw;
+     background: rgba(0,0,0,.5);
+     position: absolute;
+     top: 0;
+     left: 0;
+    }
+    #box4{
+       position: absolute; 
+       /* top: 50%; */
+       /* top:-200px; */
+       left: 50%;
+       margin-left:-150px;
+       /* margin-top: 100px; */
+       z-index: 999;
+      /* margin-top: 100px; */      
+    }
+    #box3{
+        display: flex;
+        flex-direction:column;
+        justify-content: space-between;
+        align-items: center;
+        width: 300px;
+        height: 200px; 
+        background: white;      
+        border: 1px solid black;
+        border-radius: 20px;
+        /* top:200px */
+    }
+    #box3 p{
+        margin-top: 60px;
+    }
+/* .xx-enter,.xx-leave-to{
+    z-index:999;
+    transform:translateY(-500px);
+} */
+/* 运动过程 */
+/* .xx-enter-active,.xx-leave-active{
+    z-index:999;
+    transition: .8s;
+} */
+    </style>
+</head>
+<body>
+    <div id="box">
+        <button
+        @click="changeonoff">点击</button
+            >
+        
+        <transition 
+        name="xx"        
+        @before-enter="beforeEnter"
+        @enter="enter"
+       
+        @before-leave="beforeLeave"
+        @leave="leave"
+        >
+        
+       
+        <app 
+        :ponoff="onoff"
+        @cl="changeonoff"
+        v-show="onoff"
+        >
+        
+        <!-- 子组件行间属性或者插槽中可以用父级数据，但是模版中使用父级数据必须先引入在使用 -->
+       
+            <p slot="gb"> 
+           是不是对的
+            </p>
+        </app>
+        </transition>
+       
+
+        <div id="shadow" v-show="onoff"></div>
+    
+    </div>
+   <template id="app" >
+       <div id="box4" >
+       <!-- <div id="box4" v-show="ponoff"> -->
+        <!-- 子组件行间属性可以用父级数据，但是模版中使用父级数据必须先引入在使用 -->
+           <div id="box3">
+            <slot name="gb">
+                <p>你好，世界</p>
+            </slot>
+                <div>
+                    <button @click="close">确定</button>
+                    <button @click="close">取消</button>
+                </div>
+           </div>
+       </div>
+   </template>
+   
+
+    <script src="vue.js"></script>
+    <script>
+    /*
+    动画
+    1在使用组件中用transition标间包住
+    2在样式中设置
+    .v-enter{
+        top:-200px
+    }
+    .v-enter-to{
+        top:200px
+    }
+    .v-enter-active{
+        transition: 2s;
+    }
+    .v-leave{}
+    .v-leave-to{}
+    .v-leave-active{}
+    自定义动画，区别不同的效果可以给transition标签加一个name属性，把v边切name属性值即可
+    js钩子动画在transition标签上添加事件，在方法中编辑事件即可
+
+
+    cli
+     
+        安装
+            yarn global add @vue/cli       npm install -g @vue/cli
+
+        创建项目
+            vue create ccc(设置项目名)
+
+        运行：
+        cd ccc(项目名字)
+
+        npm run  serve 
+
+       
+    */
+    const app={
+        template:"#app",
+        props:['ponoff'],
+        methods: {
+            close(){
+                this.$emit('cl')
+            }
+        },
+    }
+    new Vue({
+        el:"#box",
+        data:{
+            onoff:false
+        },
+        methods: {
+            changeonoff(){
+                this.onoff=!this.onoff
+            },
+            beforeEnter(ele){
+                console.log( ele)
+                
+               
+                ele.style.transition = '.5s';
+                ele.style.transform = 'translateY(-300px)';
+            },
+            enter(ele){
+              
+               
+                ele.offsetLeft;//务必加上才能起作用
+                ele.style.transition = '.5s';
+                ele.style.transform = 'translateY(200px)';
+            },
+            beforeLeave(ele){
+                ele.style.transform = 'translateY(200px)';
+            },
+            leave(ele){
+                ele.offsetLeft;//务必加上才能起作用
+                ele.style.transition = '.5s';
+                ele.style.transform = 'translateY(-300px)';
+            },
+           
+        },
+            
+        components:{
+            app
+        }
+
+    })
+    
+    </script>
+</body>
+</html>

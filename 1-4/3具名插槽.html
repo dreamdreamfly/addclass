@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+       <box>
+           <p slot="footer">
+               我有八只脚
+           </p>
+       </box>
+
+    </div>
+    <template id="box">
+        <div>
+             <span>
+                 <slot name="header">
+                 我是头部
+                 </slot>
+              </span>
+             <span>
+                 
+                 <slot name="body">
+                     我是身体
+                </slot>
+            </span>
+             <span>
+                <slot name="footer">
+                     我是脚
+                </slot>
+            </span>
+        </div>
+    </template>
+    <script src="vue.js"></script>
+    <script>
+    /*
+      具名插槽
+      在slot标签中设置一个name属性，值随便设置，
+      在插入替换内容的时候，在替换标签中定义一个slot的属性值和上面设置的name值对应
+    */
+   const box ={
+       template:"#box"
+   }
+   new Vue({
+       el:"#app",
+       components:{
+        box
+       }
+   })
+    </script>
+</body>
+</html>
