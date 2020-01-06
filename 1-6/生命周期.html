@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<div id="box">
+    <button @click="add">添加数据</button>
+    <button @click="rm">删除数据</button>
+  <ul id="ul">
+      <li v-for="(val,key) in ary">{{val}}</li>
+  </ul>
+</div>
+
+<body>
+    <script src="vue.js"></script>
+    <script>
+        /*
+        生命周期：
+           created(){
+               初始化之后，可以拿到数据，ajax请求在这里
+           }
+           mounted(){
+               渲染之后，DOM操作可以在这里
+           }
+           destroy(){
+               销毁之后，可以解绑定时器，事件监听等
+           }
+        
+        */
+    new Vue({
+        
+        el:"#box",
+        data:{
+            ary:[1,2,3],
+            timer:null
+        },
+        methods: {
+            add(){
+                this.ary.push(1)
+            },
+            rm(){
+                //销毁这个实例，解除与其他组件的联系
+            this.$destroy()
+            }
+        },
+        //初始化之前，拿不到数据
+        beforeCreate() {
+            console.log(this.ary);//undefined
+        },
+        //初始化之后，可以拿到数据。例如ajax请求在这里
+        created() {
+            console.log(this.ary);
+            timer=setInterval(()=>{
+     console.log(1);
+     
+            },1000)
+            
+        },
+        //如果没有挂载元素，就没有下面的生命周期
+        //渲染之前
+        beforeMount() {
+            console.log(ul.children);
+            
+        },
+        //渲染之后，DOM操作可以在这里
+        mounted(){
+            console.log(ul.children)
+        },
+        //两个都是数据更新之后的，一个是DOM更新之前的一个是DOM更新之后的
+
+        //DOM更新之前
+        beforeUpdate() {
+            console.log(this.ary,ul.children);
+            
+        },
+        //DOM更新之后的
+        updated() {
+            console.log(this.ary,ul.children);
+        },
+        //销毁之前的
+        beforeDestroy() {
+            
+        },
+        //销毁之后的,可以把一些定时器，事件等解除了
+        destroyed() {
+            clearInterval(timer)
+        },
+        
+    })
+    //.$mount('#box')//挂载元素也可以在实例的后面加上(链式调用).$mount('#box')
+    
+    </script>
+</body>
+</html>
