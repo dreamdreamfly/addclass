@@ -1,0 +1,6 @@
+# session-id跨域
+
+- 种session-id是在localhost：80
+请求的时候是在框架8080下导致跨域无法获取不能使用session-id
+
+用框架进行axios请求会有两次 一个是option
