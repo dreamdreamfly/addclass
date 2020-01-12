@@ -11,7 +11,7 @@ actions 响应到view上的用户输入导致的状态变化（v-model）
 ```
 
 # 基本操作
-- 下载vuex yarn add vuex
+- 下载vuex yarn add vuex /npm i vuex -s
 - 引包
   - import Vuex from 'vuex'
   - Vue.use(vuex)
@@ -71,6 +71,7 @@ actions 响应到view上的用户输入导致的状态变化（v-model）
     methods:{
         ...MapMutations(['mutations中触发数据的名字']),
         add(){
+            this.['mutations中触发数据的名字']()
 
         }
     }
